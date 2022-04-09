@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Şarkı</title>
+    </head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="/panel/album" value="Album" />
+            <h:commandButton action="/panel/sarki" value="Sarki" />
+        </h:form> 
+        <br></br>
+        <h:form>
+           
+            
+            <h:dataTable border="1" value="#{sarkiController.getSarkilar()}" var="sarki">
+                <h:column>
+                    <f:facet name="header"> Sarki Adı</f:facet>
+                    <h:outputText value="#{sarki.sarkiAdi}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Sarki ID</f:facet>
+                    <h:outputText value="#{sarki.sarkiID}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Sanatci ID</f:facet>
+                    <h:outputText value="#{sarki.sanatciID}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Album ID</f:facet>
+                    <h:outputText value="#{sarki.albumID}"/>  
+                </h:column>
+
+              <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{sarkiController.delete(sarki)}" value="Sil" />
+                    <h:commandButton action="#{sarkiController.setSarki(sarki)}" value="Düzenle" />
+                </h:column>
+
+            </h:dataTable> 
+        </h:form>
+        <br></br>
+        <h:form>
+            Sarki Adi <h:inputText value="#{sarkiController.sarki.sarkiAdi}" />
+            <h:commandButton rendered="#{sarkiController.sarki.sarkiID==0}" action="#{sarkiController.create()}" value="Create"  />
+            <h:commandButton rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.update()}" value="Update" />
+        </h:form>
+        
+    </h:body>
+</html>
+

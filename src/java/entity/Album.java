@@ -15,6 +15,7 @@ public class Album {
     private String albumAdi;
     private Date guncellemeTarihi;
     
+    
     public Album(){
         
     }
