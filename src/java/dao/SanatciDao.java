@@ -17,6 +17,31 @@ import util.DbConnection;
  * @author SENANUR PAKSOY
  */
 public class SanatciDao extends DbConnection{
+    
+     public List<Sanatci> findById(int id) {
+        List<Sanatci> list = new ArrayList<>();
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from sanatci where sanatciid="+id;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+             list.add(new Sanatci(
+                     rs.getInt("sanatciid"),
+                     rs.getString("ad"),
+                     rs.getInt("albumId")
+             ));
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+    
     //Listeleme Fonskiyonu
     public List<Sanatci> list(){
         List<Sanatci> list = new ArrayList<>();        

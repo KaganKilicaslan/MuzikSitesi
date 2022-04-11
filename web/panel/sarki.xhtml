@@ -12,13 +12,18 @@
             <h:commandButton action="/panel/sarki" value="Sarki" />
             <h:commandButton action="/panel/kategory" value="Kategori" />
             <h:commandButton action="/panel/sanatci" value="Sanatçı" />
-            <h:commandButton action="/panel/liste" value="Şarkı Listesi" />
-            <h:commandButton action="/panel/kullanici" value="Kullanıcı" />
         </h:form> 
         <br></br>
         <h:form>
            
-            
+           Album
+            <h:selectOneMenu value="#{sarkiController.sarki.album}" converter="albumConverter">
+                <f:selectItems value="#{sarkiController.sarkilar}" var="c" itemValue="#{c}" itemLabel="#{c.albumadi}"/>
+            </h:selectOneMenu>
+           Sanatcı
+            <h:selectOneMenu value="#{sarkiController.sarki.sanatci}" converter="sanatciConverter">
+                <f:selectItems value="#{sarkiController.sarkilar}" var="c" itemValue="#{c}" itemLabel="#{c.ad}"/>
+            </h:selectOneMenu>
             <h:dataTable border="1" value="#{sarkiController.getSarkilar()}" var="sarki">
                 <h:column>
                     <f:facet name="header"> Sarki Adı</f:facet>
@@ -29,12 +34,12 @@
                     <h:outputText value="#{sarki.sarkiID}"/>  
                 </h:column>
                 <h:column>
-                    <f:facet name="header"> Sanatci ID</f:facet>
-                    <h:outputText value="#{sarki.sanatciID}"/>  
+                    <f:facet name="header"> Sanatci Adı</f:facet>
+                    <h:outputText value="#{sarki.sanatci.ad}"/>  
                 </h:column>
                 <h:column>
-                    <f:facet name="header"> Album ID</f:facet>
-                    <h:outputText value="#{sarki.albumID}"/>  
+                    <f:facet name="header"> Album Adı</f:facet>
+                    <h:outputText value="#{sarki.album.albumAdi}"/>  
                 </h:column>
 
               <h:column>

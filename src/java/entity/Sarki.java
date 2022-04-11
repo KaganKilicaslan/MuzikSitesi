@@ -4,37 +4,35 @@
  */
 package entity;
 
-import java.util.Date;
+import java.util.Objects;
+
 
 /**
  *
  * @author ikbal
  */
 public class Sarki {
+
     private int sarkiID;
-    private int sanatciID;
-    private int albumID;
+    private Sanatci sanatci;
+    private Album album;
     private String sarkiAdi;
-    
-    public Sarki(){
-        
+
+    public Sarki() {
+
     }
-    
-    public Sarki(int sarkiID, int sanatciID, int albumID, String sarkiAdi) {
+
+    public Sarki(int sarkiID, String sarkiAdi) {
         this.sarkiID = sarkiID;
-        this.sanatciID = sanatciID;
-        this.albumID = albumID;
         this.sarkiAdi = sarkiAdi;
     }
 
-    public String getSarkiAdi() {
-        return sarkiAdi;
-    }
-
-    public void setSarkiAdi(String sarkiAdi) {
+    public Sarki(int sarkiID, Sanatci sanatci, Album album, String sarkiAdi) {
+        this.sarkiID = sarkiID;
+        this.sanatci = sanatci;
+        this.album = album;
         this.sarkiAdi = sarkiAdi;
     }
-    
 
     public int getSarkiID() {
         return sarkiID;
@@ -44,21 +42,52 @@ public class Sarki {
         this.sarkiID = sarkiID;
     }
 
-    public int getSanatciID() {
-        return sanatciID;
+    public Sanatci getSanatci() {
+        return sanatci;
     }
 
-    public void setSanatciID(int sanatciID) {
-        this.sanatciID = sanatciID;
+    public void setSanatci(Sanatci sanatci) {
+        this.sanatci = sanatci;
     }
 
-    public int getAlbumID() {
-        return albumID;
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setAlbumID(int albumID) {
-        this.albumID = albumID;
+    public void setAlbum(Album album) {
+        this.album = album;
     }
-    
-    
+
+    public String getSarkiAdi() {
+        return sarkiAdi;
+    }
+
+    public void setSarkiAdi(String sarkiAdi) {
+        this.sarkiAdi = sarkiAdi;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.sarkiID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sarki other = (Sarki) obj;
+        return this.sarkiID == other.sarkiID;
+    }
+
+   
+
 }

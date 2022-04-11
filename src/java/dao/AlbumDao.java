@@ -6,8 +6,10 @@ package dao;
 
 import entity.Album;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import util.DbConnection;
@@ -18,8 +20,31 @@ import util.DbConnection;
  */
 public class AlbumDao extends DbConnection {
 
+     public List<Album> findById(int id) {
+        List<Album> list = new ArrayList<>();
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from album where albumid="+id;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+             list.add(new Album(
+                     rs.getInt("albumID"),
+                     rs.getString("albumAdi"),
+                     rs.getDate("guncellemeTarihi")
+             ));
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
     //Listeleme Fonskiyonu
-    public List<Album> list(){
+        public List<Album> list(){
         List<Album> list = new ArrayList<>();
        
         

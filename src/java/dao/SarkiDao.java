@@ -4,6 +4,8 @@
  */
 package dao;
 
+import entity.Album;
+import entity.Sanatci;
 import entity.Sarki;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,11 +14,31 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DbConnection;
 
-/**
- *
- * @author ikbal
- */
+
 public class SarkiDao extends DbConnection{
+    
+    private AlbumDao albumDAO;
+    private SanatciDao sanatciDao;
+    
+    public Sarki findById(int id) {
+       Sarki s = null;
+        try {
+            Connection c = this.connect();
+            Statement st = c.createStatement();
+            String query = "SELECT * from sarki where sanatciid="+id;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+               
+             s = new Sarki(rs.getInt("sarkiID"),rs.getString("sarkiAdi"));
+             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return s;
+    }
+    
     //Listeleme Fonskiyonu
     public List<Sarki> list(){
         List<Sarki> list = new ArrayList<>();
@@ -26,14 +48,16 @@ public class SarkiDao extends DbConnection{
         try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT * from sarki order by sarkiid";
+            String sorgu = "SELECT * from sarki";
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
+                Album a = (Album) this.getAlbumDAO().findById(result.getInt("albumid"));
+                Sanatci s = (Sanatci) this.getSanatciDao().findById(result.getInt("sanatciid"));
             list.add(new Sarki(
-                    result.getInt(1),
-                    result.getInt(2),
-                    result.getInt(3),
-                    result.getString(4)
+                    result.getInt("sarkiID"),
+                    s,
+                    a,
+                    result.getString("sarkiAdi")
             ));
          }
         }catch (Exception e) {
@@ -44,7 +68,7 @@ public class SarkiDao extends DbConnection{
     }
     
     //Silme Fonksiyonu
-    public String delete(Sarki sarki){
+    public void delete(Sarki sarki){
         
         try{
             Connection c = this.connect();
@@ -56,38 +80,62 @@ public class SarkiDao extends DbConnection{
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return "index";
+    
     }
     //..Oluşturma Fonksiyonu 
-    public String create(Sarki sarki){
+    public void create(Sarki sarki){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into sarki (sarkiadi) values ('"+sarki.getSarkiAdi()+"')";
-            
-
+            String sorgu = "insert into sarki (sarkiid,sanatciid,albumid,sarkiadi) values ("+ sarki.getSarkiID()+ ",'" +
+                    sarki.getSanatci().getSanatciid() + ",'" + sarki.getAlbum().getAlbumID() +
+                    "','" + sarki.getSarkiAdi() + "')";
             st.executeUpdate(sorgu);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return "index";
+        
     }
     
     //..Güncelleme Fonksiyonu 
-    public String update(Sarki sarki){
+    public void update(Sarki sarki){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "update sarki set sarkiAdi = '"+sarki.getSarkiAdi()+"' where sarkiid = '"+sarki.getSarkiID()+"'";
+            String sorgu = "update sarki set albumid = '"+sarki.getAlbum().getAlbumID()+", sarkiadi'" +sarki.getSarkiAdi()+"' where sarkiid = '"+sarki.getSarkiID()+"'";
             
 
             st.executeUpdate(sorgu);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return "index";
+       
     }
+
+    public AlbumDao getAlbumDAO() {
+       if (albumDAO == null) {
+            this.albumDAO = new AlbumDao();
+        }
+        return albumDAO;
+    }
+
+    public void setAlbumDAO(AlbumDao albumDAO) {
+        this.albumDAO = albumDAO;
+    }
+
+    public SanatciDao getSanatciDao() {
+       if (sanatciDao == null) {
+            this.sanatciDao = new SanatciDao();
+        }
+        return sanatciDao;
+    }
+
+    public void setSanatciDao(SanatciDao sanatciDao) {
+        this.sanatciDao = sanatciDao;
+    }
+    
+    
     
 }
