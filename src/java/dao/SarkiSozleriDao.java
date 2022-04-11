@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
 
@@ -11,22 +11,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DbConnection;
+
 /**
  *
- * @author HP
+ * @author SENANUR PAKSOY
  */
-
 public class SarkiSozleriDao extends DbConnection {
-
     
-     //Listeleme Fonk.
+    //Listeleme Fonskiyonu
     public List<SarkiSozleri> list(){
-        List<SarkiSozleri> list = new ArrayList<>();        
-        //Baglantı kontrol
+        List<SarkiSozleri> list = new ArrayList<>();
+       
+        
+        //Bağlantı kontrolu
         try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT * from SarkiSozleri order by sozid";
+            String sorgu = "SELECT * from sarkisozleri order by sozid";
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
             list.add(new SarkiSozleri(
@@ -35,7 +36,6 @@ public class SarkiSozleriDao extends DbConnection {
                     result.getInt(3),
                     result.getInt(4),
                     result.getString(5)
-                    
             ));
          }
         }catch (Exception e) {
@@ -44,42 +44,29 @@ public class SarkiSozleriDao extends DbConnection {
 
         return list;
     }
-   
-      //Silme Fonksiyonu
-    public String delete(SarkiSozleri sarkisozleri){
+    
+    //Silme Fonksiyonu
+    public String delete(SarkiSozleri soz){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from sarkiSozleri where sozid = "+sarkisozleri.getSozid();
+            String sql = "delete from sarkisozleri where sozid = "+soz.getSozid();
+            
+
             st.executeUpdate(sql);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
         return "index";
     }
-    
     //..Oluşturma Fonksiyonu 
-    public String create(SarkiSozleri sarkisozleri){
+    public String create(SarkiSozleri soz){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into sarkiSozleri (SarkiSozleri) values ('"+sarkisozleri.getSarkisozleri()+"') ";
-            st.executeUpdate(sorgu);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return "index";
-    }
-    
-    //..Güncelleme Fonksiyonu 
-    public String update(SarkiSozleri sarkisozleri){
-        
-        try{
-            Connection c = this.connect();
-            Statement st = c.createStatement();
-            String sorgu = "update sarkisozleri set Sarkisozleri = '"+sarkisozleri.getSarkisozleri()+"' where sozid = '"+sarkisozleri.getSozid()+ "'";
+            String sorgu = "insert into sarkisozleri (sozler) values ('"+soz.getSozler()+"')";
             
 
             st.executeUpdate(sorgu);
@@ -89,6 +76,21 @@ public class SarkiSozleriDao extends DbConnection {
         return "index";
     }
     
-   
+    //..Güncelleme Fonksiyonu 
+    public String update(SarkiSozleri soz){
+        
+        try{
+            Connection c = this.connect();
+            Statement st = c.createStatement();
+            String sorgu = "update sarkisozleri set sozler = '"+soz.getSozler()+"' where sozid = '"+soz.getSozid()+"'";
+            
+
+            st.executeUpdate(sorgu);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return "index";
+    }
+
     
 }

@@ -1,79 +1,75 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
 
-import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
-
 /**
  *
- * @author HP
+ * @author SENANUR PAKSOY
  */
-@Named(value = "sarkiSozleri")
-@Dependent
 public class SarkiSozleri {
-
     private int sozid;
     private int sanatciid;
-    private int sarkiID;
-    private int albumID;
-    private String sarkisozleri;
-    
+    private int sarkiid;
+    private int albumid;
+    private String sozler;
+
     public SarkiSozleri() {
     }
-    
-    
-    public SarkiSozleri(int sozid, int sanatciid, int sarkiID, int albumID, String sarkisozleri ) {
+
+    public SarkiSozleri(int sozid, int sanatciid, int sarkiid, int albumid, String sozler) {
         this.sozid = sozid;
         this.sanatciid = sanatciid;
-        this.sanatciid = sanatciid;
-        this.sarkiID = sarkiID;
-        this.albumID = albumID;
-        this.sarkisozleri = sarkisozleri;
+        this.sarkiid = sarkiid;
+        this.albumid = albumid;
+        this.sozler = sozler;
     }
-     public int getSozid() {
+
+    public SarkiSozleri(String sozler) {
+        this.sozler = sozler;
+    }
+
+    public int getSozid() {
         return sozid;
     }
-     
-     public void setSozid(int sozid) {
+
+    public void setSozid(int sozid) {
         this.sozid = sozid;
     }
-    
-     
-      
-     public int getSanatciid() {
+
+    public int getSanatciid() {
         return sanatciid;
     }
-     public void setSanatciid(int sanatciid) {
+
+    public void setSanatciid(int sanatciid) {
         this.sanatciid = sanatciid;
     }
-     
-     
+
+    public int getSarkiid() {
+        return sarkiid;
+    }
+
+    public void setSarkiid(int sarkiid) {
+        this.sarkiid = sarkiid;
+    }
+
+    public int getAlbumid() {
+        return albumid;
+    }
+
+    public void setAlbumid(int albumid) {
+        this.albumid = albumid;
+    }
+
+    public String getSozler() {
+        return sozler;
+    }
+
+    public void setSozler(String sozler) {
+        this.sozler = sozler;
+    }
     
-     public int getSarkiID() {
-        return sarkiID;
-    }
-     public void setSarkiID(int sarkiID) {
-        this.sarkiID = sarkiID;
-    }
-     
-     
-     
-     public int getAlbumID() {
-        return albumID;
-    }
-     public void setAlbumID(int albumID) {
-        this.albumID = albumID;
-    }
     
-     
-     public String getSarkisozleri() {
-        return sarkisozleri;
-    }
-     public void setSarkisozleri(String sarkisozleri) {
-        this.sarkisozleri = sarkisozleri;
-    }
     
 }

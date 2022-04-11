@@ -4,13 +4,8 @@
  */
 package controller;
 
-import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
 import dao.SarkiSozleriDao;
 import entity.SarkiSozleri;
-import entity.Kategory;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,54 +13,55 @@ import java.util.List;
 
 /**
  *
- * @author HP
+ * @author SENANUR PAKSOY
  */
 @Named(value = "sarkiSozleriController")
-@Dependent
+@SessionScoped
 public class SarkiSozleriController implements Serializable {
 
-    private List<SarkiSozleri> sarkisozleriler;
-    private SarkiSozleriDao sarkisozleriDao;
-    private SarkiSozleri sarkisozleri;
-   
+    private List<SarkiSozleri> sozler;
+    private SarkiSozleriDao sarkiSozleriDao;
+    private SarkiSozleri soz;
+
     public SarkiSozleriController() {
     }
-    
-    public List<SarkiSozleri> getSarkiSozleriler() {
-        sarkisozleriDao = new SarkiSozleriDao();
-        return sarkisozleriDao.list();
-    }
+
+    public List<SarkiSozleri> getSozler() {
+       sarkiSozleriDao = new SarkiSozleriDao();
+        return sarkiSozleriDao.list();    }
+
+   
 
     public SarkiSozleriDao getSarkiSozleriDao() {
-        return sarkisozleriDao;
+        return sarkiSozleriDao;
     }
 
-    public void setIndirilenlerDao(SarkiSozleriDao sarkisozleriDao) {
-        this.sarkisozleriDao = sarkisozleriDao;
+    public void setSarkiSozleriDao(SarkiSozleriDao sarkiSozleriDao) {
+        this.sarkiSozleriDao = sarkiSozleriDao;
     }
 
-    public SarkiSozleri getsarkisozleri() {
-         if(this.sarkisozleri == null){
-            sarkisozleri = new SarkiSozleri();
+    public SarkiSozleri getSoz() {
+        if(this.soz == null){
+            soz = new SarkiSozleri();
         }
-        return sarkisozleri;
+        return soz;
     }
 
-    public void setSarkiSozleri(SarkiSozleri sarkisozleri) {
-        this.sarkisozleri = sarkisozleri;
+    public void setSoz(SarkiSozleri soz) {
+        this.soz = soz;
     }
-
     
     public void update(){
-        sarkisozleriDao.update(this.sarkisozleri);
-        sarkisozleri = new SarkiSozleri();
+        sarkiSozleriDao.update(this.soz);
+        soz = new SarkiSozleri();
     }
-    public void delete(SarkiSozleri sarkisozleri){
-        sarkisozleriDao.delete(sarkisozleri);
+    public void delete(SarkiSozleri soz){
+        sarkiSozleriDao.delete(soz);
     }
     public void create(){
-        sarkisozleriDao.create(this.sarkisozleri);
-        sarkisozleri = new SarkiSozleri();
+        sarkiSozleriDao.create(this.soz);
+        soz = new SarkiSozleri();
     }
+
     
 }

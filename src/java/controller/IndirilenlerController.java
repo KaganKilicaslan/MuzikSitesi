@@ -4,34 +4,33 @@
  */
 package controller;
 
-import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
 import dao.IndirilenlerDao;
 import entity.Indirilenler;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.Dependent;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  *
- * @author HP
+ * @author SENANUR PAKSOY
  */
 @Named(value = "indirilenlerController")
 @Dependent
-public class IndirilenlerController implements Serializable {
+public class IndirilenlerController implements Serializable{
 
-    private List<Indirilenler> indirilenlerler;
+    private List<Indirilenler> indirilenler;
     private IndirilenlerDao indirilenlerDao;
-    private Indirilenler indirilenler;
+    private Indirilenler indirilen;
     
     public IndirilenlerController() {
     }
-    
-    public List<Indirilenler> getIndirilenlerler() {
+
+    public List<Indirilenler> getIndirilenler() {
         indirilenlerDao = new IndirilenlerDao();
         return indirilenlerDao.list();
     }
+
 
     public IndirilenlerDao getIndirilenlerDao() {
         return indirilenlerDao;
@@ -41,30 +40,29 @@ public class IndirilenlerController implements Serializable {
         this.indirilenlerDao = indirilenlerDao;
     }
 
-    public Indirilenler getindirilenler() {
-         if(this.indirilenler == null){
-            indirilenler = new Indirilenler();
+    public Indirilenler getIndirilen() {
+        if(this.indirilen == null){
+            indirilen = new Indirilenler();
         }
-        return indirilenler;
+        return indirilen;
     }
 
-    public void setIndirilenler(Indirilenler indirilenler) {
-        this.indirilenler = indirilenler;
+    public void setIndirilen(Indirilenler indirilen) {
+        this.indirilen = indirilen;
     }
-
     
-    /*public void update(){
-        indirilenlerDao.update(this.indirilenler);
-        indirilenler = new Indirilenler();
+     public void update(){
+        indirilenlerDao.update(this.indirilen);
+        indirilen = new Indirilenler();
     }
-    public void delete(Indirilenler indirilenler){
-        indirilenlerDao.delete(indirilenler);
+    public void delete(Indirilenler indirilen){
+        indirilenlerDao.delete(indirilen);
     }
     public void create(){
-        indirilenlerDao.create(this.indirilenler);
-        indirilenler = new Indirilenler();
+        indirilenlerDao.create(this.indirilen);
+        indirilen = new Indirilenler();
     }
-*/
+    
     
     
 }

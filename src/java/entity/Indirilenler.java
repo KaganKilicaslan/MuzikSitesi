@@ -1,67 +1,62 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
 
-
 /**
  *
- * @author HP
+ * @author SENANUR PAKSOY
  */
-
 public class Indirilenler {
-
     private int indirid;
-    private int albumId;
     private int sanatciid;
-    private int sarkiID;
-  
+    private int sarkiid;
+    private int albumid;
+
     public Indirilenler() {
     }
-    
-    public Indirilenler(int indirid, int albumId,int sanatciid, int sarkiID ) {
+
+    public Indirilenler(int indirid, int sanatciid,int sarkiid, int albumid) {
         this.indirid = indirid;
-        this.albumId = albumId;
         this.sanatciid = sanatciid;
-        this.sarkiID = sarkiID;
-    }
-     public int getIndirid() {
-        return indirid;
-    }
-     
-     public void setIndirid(int indirid) {
-        this.indirid = indirid;
-    }
-    
-     
-      
-     public int getAlbumId() {
-        return albumId;
-    }
-     public void setAlbumId(int albumId) {
-        this.albumId = albumId;
-    }
-     
-     
-    
-     public int getSanatciid() {
-        return sanatciid;
-    }
-     public void setSanatciid(int sanatciid) {
-        this.sanatciid = sanatciid;
-    }
-     
-     
-     
-     public int getSarkiID() {
-        return sarkiID;
-    }
-     public void setsarkiID(int sarkiID) {
-        this.sarkiID = sarkiID;
+        this.sarkiid = sarkiid;
+        this.albumid = albumid;
     }
 
-    public String getindirId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    public int getIndirid() {
+        return indirid;
     }
+
+    public void setIndirid(int indirid) {
+        this.indirid = indirid;
+    }
+
+    public int getSanatciid() {
+        return sanatciid;
+    }
+
+    public void setSanatciid(int sanatciid) {
+        this.sanatciid = sanatciid;
+    }
+
+    public int getAlbumid() {
+        return albumid;
+    }
+
+    public void setAlbumid(int albumid) {
+        this.albumid = albumid;
+    }
+
+    public int getSarkiid() {
+        return sarkiid;
+    }
+
+    public void setSarkiid(int sarkiid) {
+        this.sarkiid = sarkiid;
+    }
+    
+    
+
 }

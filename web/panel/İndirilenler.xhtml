@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Indirilenler</title>
+    </head>
+    <body>
+        <h:form>
+            <h:commandButton action="/panel/album" value="Album" />
+            <h:commandButton action="/panel/sanatci" value="Sanatcı" />
+            <h:commandButton action="/panel/indirilenler" value="İndirilenler" />
+        </h:form>    
+        <br></br>
+        <h:form>
+            <h:dataTable border="1" value="#{indirilenlerController.getIndirilenler()}" var="indirilen">
+                <h:column>
+                    <f:facet name="header">Indirilenler ID</f:facet>
+                    <h:outputText value="#{indirilen.indirid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Sanatcı ID</f:facet>
+                    <h:outputText value="#{indirilen.sanatciid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Album ID</f:facet>
+                    <h:outputText value="#{indirilen.albumid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Şarkı ID</f:facet>
+                    <h:outputText value="#{indirilen.sarkiid}"/>  
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{indirilenlerController.delete(indirilen)}" value="Sil" />
+                    <h:commandButton action="#{indirilenlerController.setIndirilen(indirilen)}" value="Düzenle" />
+                </h:column>
+
+            </h:dataTable> 
+        </h:form>
+
+        <br></br>
+        <h:form>
+            Indirilecek Şarkı <h:inputText value="#{indirilenlerController.indirilen.indirid}" />
+            <h:commandButton rendered="#{indirilenlerController.indirilen.indirid==0}" action="#{indirilenlerController.create()}" value="Create"  />
+            <h:commandButton rendered="#{indirilenlerController.indirilen.indirid!=0}" action="#{indirilenlerController.update()}" value="Update" />
+        </h:form>
+    </body>
+</html>
+
