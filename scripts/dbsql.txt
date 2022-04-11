@@ -1,0 +1,52 @@
+create table album (
+	albumID serial primary key not null,
+	albumAdi varchar(30) not null,
+	guncellemeTarihi timestamp default current_timestamp
+);
+
+create table sanatci (
+	sanatciID serial primary key not null,
+	ad varchar(30) not null,
+	albumID integer references album(albumID)
+);
+
+create table sarki(
+	sarkiID serial primary key not null,
+	sanatciID integer references sanatci(sanatciID),
+	albumID integer references album(albumID)
+);
+
+create table sarkiListesi(
+	listeID serial primary key not null,
+	listeAdi varchar(50) not null,
+	sarkiID integer references sarki(sarkiID),
+	sanatciID integer references sanatci(sanatciID),
+	album integer references album(albumID)
+);
+
+create table kategori (
+	kategoriID serial primary key not null,
+	kategoryAdi varchar(50) not null
+);
+
+create table kullanici(
+	kullaniciID serial primary key not null,
+	ad varchar(30) not null,
+	soyad varchar(30) not null,
+	kullaniciAdi varchar(30) not null
+);
+
+create table sarkisozleri(
+	sozID serial primary key not null,
+	sanatciID integer references sanatci(sanatciID),
+	sarkiID integer references sarki(sarkiID),
+	albumID integer references album(albumID),
+	sozler varchar(999) not null
+);
+
+create table indirilenler(
+	indirID serial primary key not null,
+	sanatciID integer references sanatci(sanatciID),
+	sarkiID integer references sarki(sarkiID),
+	albumID integer references album(albumID)
+);
