@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author karao
  */
-@Named(value = "kategoriController")
+@Named(value = "KategoriController")
 @SessionScoped
 public class KategoriController implements Serializable {
 
@@ -45,14 +45,14 @@ public class KategoriController implements Serializable {
         this.kategoriDao = kategoriDao;
     }
 
-    public Kategori getKategory() {
+    public Kategori getKategori() {
         if(this.kategori == null){
             kategori = new Kategori();
         }
         return kategori;
     }
 
-    public void setKategory(Kategori kategori) {
+    public void setKategori(Kategori kategori) {
         this.kategori = kategori;
     }
     public void update(){
