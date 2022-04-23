@@ -5,8 +5,8 @@
 package dao;
 
 
-import entity.Album;
-import entity.Kategory;
+
+import entity.Kategori;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -18,9 +18,9 @@ import util.DbConnection;
  *
  * @author karao
  */
-public class KategoryDao extends DbConnection {
-    public List<Kategory> list(){
-        List<Kategory> list = new ArrayList<>();
+public class KategoriDao extends DbConnection {
+    public List<Kategori> list(){
+        List<Kategori> list = new ArrayList<>();
 
       try{
             Connection c = this.connect();
@@ -28,7 +28,7 @@ public class KategoryDao extends DbConnection {
             String sorgu = "SELECT * from kategori order by kategoriid";
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
-            list.add(new Kategory(
+            list.add(new Kategori(
                     result.getInt(1),
                     result.getString(2)
                     
@@ -43,12 +43,12 @@ public class KategoryDao extends DbConnection {
     
     
      //Silme Fonksiyonu
-    public String delete(Kategory kategory){
+    public String delete(Kategori kategori){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from kategori where kategoriid = "+kategory.getKategoryID();
+            String sql = "delete from kategori where kategoriid = "+kategori.getKategoriID();
             
 
             st.executeUpdate(sql);
@@ -58,12 +58,12 @@ public class KategoryDao extends DbConnection {
         return "index";
     }
     //..Oluşturma Fonksiyonu 
-    public String create(Kategory kategory){
+    public String create(Kategori kategori){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into kategori (kategoriadi) values ('"+kategory.getKategoryAdi()+"')";
+            String sorgu = "insert into kategori (kategoriadi) values ('"+kategori.getKategoriAdi()+"')";
             
 
             st.executeUpdate(sorgu);
@@ -74,12 +74,12 @@ public class KategoryDao extends DbConnection {
     }
     
     //..Güncelleme Fonksiyonu 
-    public String update(Kategory kategory){
+    public String update(Kategori kategori){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "update kategori set kategoriadi = '"+kategory.getKategoryAdi()+"' where kategoriid = '"+kategory.getKategoryID()+"'";
+            String sorgu = "update kategori set kategoriadi = '"+kategori.getKategoriAdi()+"' where kategoriid = '"+kategori.getKategoriID()+"'";
             
 
             st.executeUpdate(sorgu);
