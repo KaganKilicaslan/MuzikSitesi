@@ -48,9 +48,15 @@ public class ListeController implements Serializable {
     }
 
     public Liste getListe() {
+        if(this.liste==null){
+            this.liste=new Liste();
+        }
         return liste;
     }
-
+    /* 
+    sarki listesine sarki ekleyince veri eklemek 
+    için düzenleye tıklayıp yapmak gerekiyordu bu kod onu ortadan kaldırdı
+*/
     public void setListe(Liste liste) {
         this.liste = liste;
     }
