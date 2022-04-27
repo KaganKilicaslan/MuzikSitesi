@@ -16,75 +16,78 @@ import util.DbConnection;
  *
  * @author karao
  */
-public class KullaniciDao extends DbConnection{
+public class KullaniciDao extends DbConnection {
+
     //Listeleme Fonskiyonu
-    public List<Kullanici> list(){
+    public List<Kullanici> list() {
         List<Kullanici> list = new ArrayList<>();
-       
-        
+
         //Bağlantı kontrolu
-        try{
+        try {
             Connection c = this.connect();
             Statement state = c.createStatement();
             String sorgu = "SELECT * from kullanici order by kullaniciid";
-            ResultSet  result = state.executeQuery(sorgu);
-            while(result.next()){
-            list.add(new Kullanici(
-                    result.getInt(1),
-                    result.getString(2),
-                    result.getString(3),
-                    result.getString(4)
-            ));
-         }
-        }catch (Exception e) {
+            ResultSet result = state.executeQuery(sorgu);
+            while (result.next()) {
+                list.add(new Kullanici(
+                        result.getInt(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4),
+                        result.getString(5)
+                ));
+            }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         return list;
     }
-    
+
     //Silme Fonksiyonu
-    public String delete(Kullanici kullanici){
-        
-        try{
+    public String delete(Kullanici kullanici) {
+
+        try {
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from kullanici where kullaniciid = "+kullanici.getKullaniciID();
-            
+            String sql = "delete from kullanici where kullaniciid = " + kullanici.getKullaniciID();
 
             st.executeUpdate(sql);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return "index";
     }
+
     //..Oluşturma Fonksiyonu 
-    public String create(Kullanici kullanici){
-        
-        try{
+    public String create(Kullanici kullanici) {
+
+        try {
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into kullanici (kullaniciAdi) values ('"+kullanici.getKullaniciAdi()+"')";
-            
-
+            String sorgu = "insert into kullanici (ad,soyad,kullaniciadi,sifre) values ('"+ kullanici.getKullaniciAdi()+
+                    "', '"+kullanici.getKullaniciSoyad()+ "', '" + kullanici.getNickName() + "','"+kullanici.getSifre()+"' )";
             st.executeUpdate(sorgu);
-        } catch (Exception e){
+           
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return "index";
-    } 
-    
+    }
+
     //..Güncelleme Fonksiyonu 
-    public String update(Kullanici kullanici){
-        
-        try{
+    public String update(Kullanici kullanici) {
+
+        try {
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "update kullanici set kullaniciAdi = '"+kullanici.getKullaniciAdi()+"' where kullaniciId = '"+kullanici.getKullaniciID()+"'";
-            
-
+            /*String sorgu = "update kullanici set kullaniciadi = '" + kullanici.getNickName() + 
+                    "' where kullaniciId = '" + kullanici.getKullaniciID() + "'";*/
+            String sorgu = "update kullanici set ad='"+kullanici.getKullaniciAdi()+
+                    "', soyad='"+kullanici.getKullaniciSoyad()+"', kullaniciadi='"+ kullanici.getNickName()+"',sifre='"+kullanici.getSifre()+
+                    "' where kullaniciId = '" + kullanici.getKullaniciID()+ "'";
             st.executeUpdate(sorgu);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return "index";

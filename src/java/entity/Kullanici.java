@@ -9,21 +9,29 @@ package entity;
  * @author karao
  */
 public class Kullanici {
+
     private int kullaniciID;
     private String kullaniciAdi;
     private String kullaniciSoyad;
     private String nickName;
+    private String sifre;
 
     public Kullanici() {
     }
 
-    
-    
-    public Kullanici(int kullaniciID, String kullaniciAdi, String kullaniciSoyad, String nickName) {
+    public Kullanici(String kullaniciAdi, String kullaniciSoyad, String nickName, String sifre) {
+        this.kullaniciAdi = kullaniciAdi;
+        this.kullaniciSoyad = kullaniciSoyad;
+        this.nickName = nickName;
+        this.sifre = sifre;
+    }
+
+    public Kullanici(int kullaniciID, String kullaniciAdi, String kullaniciSoyad, String nickName, String sifre) {
         this.kullaniciID = kullaniciID;
         this.kullaniciAdi = kullaniciAdi;
         this.kullaniciSoyad = kullaniciSoyad;
         this.nickName = nickName;
+        this.sifre = sifre;
     }
 
     public int getKullaniciID() {
@@ -57,9 +65,13 @@ public class Kullanici {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
-    
-    
-    
-    
-    
+
+    public String getSifre() {
+        return sifre;
+    }
+
+    public void setSifre(String sifre) {
+        this.sifre = sifre;
+    }
+
 }

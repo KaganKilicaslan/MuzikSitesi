@@ -1,23 +1,35 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title> Kullanıcı </title>
     </head>
     <h:body>
         <h:form>
-           <h:commandButton action="/panel/album" value="Album" />
+            <h:commandButton action="/panel/album" value="Album" />
             <h:commandButton action="/panel/sarki" value="Sarki" />
-            <h:commandButton action="/panel/kategori" value="Kategori" />
+            <h:commandButton action="/panel/kategory" value="Kategori" />
             <h:commandButton action="/panel/sanatci" value="Sanatçı" />
             <h:commandButton action="/panel/liste" value="Şarkı Listesi" />
             <h:commandButton action="/panel/kullanici" value="Kullanıcı" />
             <h:commandButton action="/panel/sarkisozleri" value="Şarkı Sözleri" />
             <h:commandButton action="/panel/indirilenler" value="İndirilenler" />
+            <h:commandButton action="/index" value="Home"/>  
         </h:form> 
         <br></br>
+        <h:form>
+
+            Ad:<h:inputText value="#{kullaniciController.kullanici.kullaniciAdi}"/>
+            Soyad:<h:inputText value="#{kullaniciController.kullanici.kullaniciSoyad}"/>
+            Kullanıcı Adı:<h:inputText value="#{kullaniciController.kullanici.nickName}"/>
+            Sifre: <h:inputText value="#{kullaniciController.kullanici.sifre}" /><br />
+            <h:commandButton rendered="#{kullaniciController.kullanici.kullaniciID==0}" action="#{kullaniciController.create()}" value="Create"/>
+            <h:commandButton rendered="#{kullaniciController.kullanici.kullaniciID!=0}" action="#{kullaniciController.update()}" value="Update"/>
+
+        </h:form>
+
         <h:form>
             <h:dataTable border="1" value="#{kullaniciController.getKullanicilar()}" var="kullanici">
                 <h:column>
@@ -36,22 +48,17 @@
                     <f:facet name="header"> Kullanıcı Adı</f:facet>
                     <h:outputText value="#{kullanici.nickName}"/>  
                 </h:column>
-
-              <h:column>
+                <h:column>
+                    <f:facet name="header"> şifre</f:facet>
+                    <h:outputText value="#{kullanici.sifre}"/>  
+                </h:column>
+                <h:column>
                     <f:facet name="header">YONET</f:facet>
                     <h:commandButton action="#{kullaniciController.delete(kullanici)}" value="Sil" />
                     <h:commandButton action="#{kullaniciController.setKullanici(kullanici)}" value="Düzenle" />
                 </h:column>
-
             </h:dataTable> 
         </h:form>
-        <br></br>
-        <h:form>
-            Kullanıcı Adı <h:inputText value="#{kullaniciController.kullanici.kullaniciAdi}" />
-            <h:commandButton rendered="#{kullaniciController.kullanici.kullaniciID==0}" action="#{kullaniciController.create()}" value="Create"  />
-            <h:commandButton rendered="#{kullaniciController.kullanici.kullaniciID!=0}" action="#{kullaniciController.update()}" value="Update" />
-        </h:form>
-        
     </h:body>
 </html>
 
