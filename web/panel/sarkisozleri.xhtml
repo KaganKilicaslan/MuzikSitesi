@@ -15,7 +15,7 @@
             <h:commandButton action="/panel/liste" value="Şarkı Listesi" />
             <h:commandButton action="/panel/kullanici" value="Kullanıcı" />
             <h:commandButton action="/panel/sarkisozleri" value="Şarkı Sözleri" />
-            <h:commandButton action="/panel/indirilenler" value="İndirilenler" />
+            <h:commandButton action="/panel/yayinci" value="Yayıncı" />
 
         </h:form>    
             <br></br>
@@ -23,30 +23,33 @@
                 <h:dataTable border="1" value="#{sarkiSozleriController.getSozler()}" var="soz">
                     <h:column>
                         <f:facet name="header"> Sarki Sozleri ID</f:facet>
-                        <h:outputText value="#{soz.sozid}"/>  
+                        <h:outputText value="#{soz.sozID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Sanatcı ID</f:facet>
+                        <h:outputText value="#{soz.sanatciId}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Şarki ID</f:facet>
+                        <h:outputText value="#{soz.sarkiId}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Album ID</f:facet>
+                        <h:outputText value="#{soz.albumId}"/>  
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Sarki Sozleri</f:facet>
                         <h:outputText value="#{soz.sozler}"/>  
                     </h:column>
-                    <h:column>
-                        <f:facet name="header"> Sanatcı ID</f:facet>
-                        <h:outputText value="#{soz.sanatciid}"/>  
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header"> Album ID</f:facet>
-                        <h:outputText value="#{soz.albumid}"/>  
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header"> Şarki ID</f:facet>
-                        <h:outputText value="#{soz.sarkiid}"/>  
-                    </h:column>
+                    
+                    
+                    
                     
 
                     <h:column>
                         <f:facet name="header">YONET</f:facet>
                         <h:commandButton action="#{sarkiSozleriController.delete(soz)}" value="Sil" />
-                        <h:commandButton action="#{sarkiSozleriController.setSozler(soz)}" value="Düzenle" />
+                        <h:commandButton action="#{sarkiSozleriController.setSoz(soz)}" value="Düzenle" />
                     </h:column>
 
                 </h:dataTable> 
@@ -54,9 +57,9 @@
         
             <br></br>
             <h:form>
-                Şarki Sözü <h:inputText value="#{sarkiSozleriController.soz.sozid}" />
-                <h:commandButton rendered="#{sarkiSozleriController.soz.sozid==0}" action="#{sarkiSozleriController.create()}" value="Create"  />
-                <h:commandButton rendered="#{sarkiSozleriController.soz.sozid!=0}" action="#{sarkiSozleriController.update()}" value="Update" />
+                Şarki Sözü <h:inputText value="#{sarkiSozleriController.soz.sozler}" />
+                <h:commandButton rendered="#{sarkiSozleriController.soz.sozID==0}" action="#{sarkiSozleriController.create()}" value="Create"  />
+                <h:commandButton rendered="#{sarkiSozleriController.soz.sozID!=0}" action="#{sarkiSozleriController.update()}" value="Update" />
             </h:form>
     </body>
 </html>

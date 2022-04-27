@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entity.SarkiSozleri;
+import entity.Yayinci;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,42 +16,40 @@ import util.DbConnection;
  *
  * @author Kagan
  */
-public class SarkiSozleriDao extends DbConnection {
+public class YayinciDao extends DbConnection {
     
-    //Listeleme Fonskiyonu
-    public List<SarkiSozleri> list(){
-        List<SarkiSozleri> list = new ArrayList<>();
-       
-        
-        //Bağlantı kontrolu
+    public List<Yayinci> list(){
+        List<Yayinci> list = new ArrayList<>();
+    
         try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT * from sarkisozleri order by sozid";
+            String sorgu = "SELECT * from yayinci order by yayinciid";
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
-            list.add(new SarkiSozleri(
+            list.add(new Yayinci(
                     result.getInt(1),
                     result.getInt(2),
                     result.getInt(3),
                     result.getInt(4),
                     result.getString(5)
+                    
             ));
-         }
+         } 
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        
         return list;
     }
-    
-    //Silme Fonk.
-    public String delete(SarkiSozleri soz){
+        
+         //Silme Fonk.   
+    public String delete(Yayinci yayinci){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from sarkisozleri where sozid = "+soz.getSozID();
+            String sql = "delete from yayinci where yayinciid = "+yayinci.getYayinciID();
             
 
             st.executeUpdate(sql);
@@ -60,13 +58,29 @@ public class SarkiSozleriDao extends DbConnection {
         }
         return "index";
     }
-    //Oluşturma Fonk. 
-    public String create(SarkiSozleri soz){
+    //Oluşturma Fonk.
+     public String create(Yayinci yayinci){
         
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into sarkisozleri (sozler) values ('"+soz.getSozler()+"')";
+            String sorgu = "insert into yayinci (yayinciad) values ('"+yayinci.getYayinciAd()+"')";
+            
+
+            st.executeUpdate(sorgu);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return "index";
+    }    
+     
+     //Guncelleme Fonk.
+    public String update(Yayinci yayinci){
+        
+        try{
+            Connection c = this.connect();
+            Statement st = c.createStatement();
+            String sorgu = "update yayinci set yayinciad = '"+yayinci.getYayinciAd()+"' where yayinciid = '"+yayinci.getYayinciID()+"'";
             
 
             st.executeUpdate(sorgu);
@@ -75,22 +89,5 @@ public class SarkiSozleriDao extends DbConnection {
         }
         return "index";
     }
-    
-    //Güncelleme Fonk. 
-    public String update(SarkiSozleri soz){
-        
-        try{
-            Connection c = this.connect();
-            Statement st = c.createStatement();
-            String sorgu = "update sarkisozleri set sozler = '"+soz.getSozler()+"' where sozid = '"+soz.getSozID()+"'";
-            
-
-            st.executeUpdate(sorgu);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return "index";
-    }
-
-    
+       
 }

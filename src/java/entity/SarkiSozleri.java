@@ -6,60 +6,56 @@ package entity;
 
 /**
  *
- * @author SENANUR PAKSOY
+ * @author Kagan
  */
 public class SarkiSozleri {
-    private int sozid;
-    private int sanatciid;
-    private int sarkiid;
-    private int albumid;
+    private int sozID;
+    private int sanatciId;
+    private int sarkiId;
+    private int albumId;
     private String sozler;
 
     public SarkiSozleri() {
     }
 
-    public SarkiSozleri(int sozid, int sanatciid, int sarkiid, int albumid, String sozler) {
-        this.sozid = sozid;
-        this.sanatciid = sanatciid;
-        this.sarkiid = sarkiid;
-        this.albumid = albumid;
+    public SarkiSozleri(int sozID, int sanatciId, int sarkiId, int albumId, String sozler) {
+        this.sozID = sozID;
+        this.sanatciId = sanatciId;
+        this.sarkiId = sarkiId;
+        this.albumId = albumId;
         this.sozler = sozler;
     }
 
-    public SarkiSozleri(String sozler) {
-        this.sozler = sozler;
+    public int getSozID() {
+        return sozID;
     }
 
-    public int getSozid() {
-        return sozid;
+    public void setSozID(int sozID) {
+        this.sozID = sozID;
     }
 
-    public void setSozid(int sozid) {
-        this.sozid = sozid;
+    public int getSanatciId() {
+        return sanatciId;
     }
 
-    public int getSanatciid() {
-        return sanatciid;
+    public void setSanatciId(int sanatciId) {
+        this.sanatciId = sanatciId;
     }
 
-    public void setSanatciid(int sanatciid) {
-        this.sanatciid = sanatciid;
+    public int getSarkiId() {
+        return sarkiId;
     }
 
-    public int getSarkiid() {
-        return sarkiid;
+    public void setSarkiId(int sarkiId) {
+        this.sarkiId = sarkiId;
     }
 
-    public void setSarkiid(int sarkiid) {
-        this.sarkiid = sarkiid;
+    public int getAlbumId() {
+        return albumId;
     }
 
-    public int getAlbumid() {
-        return albumid;
-    }
-
-    public void setAlbumid(int albumid) {
-        this.albumid = albumid;
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
 
     public String getSozler() {
@@ -69,6 +65,7 @@ public class SarkiSozleri {
     public void setSozler(String sozler) {
         this.sozler = sozler;
     }
+    
     
     
     

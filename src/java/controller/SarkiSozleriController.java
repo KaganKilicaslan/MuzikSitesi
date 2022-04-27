@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author SENANUR PAKSOY
+ * @author Kagan
  */
 @Named(value = "sarkiSozleriController")
 @SessionScoped
@@ -27,10 +27,13 @@ public class SarkiSozleriController implements Serializable {
     }
 
     public List<SarkiSozleri> getSozler() {
-       sarkiSozleriDao = new SarkiSozleriDao();
-        return sarkiSozleriDao.list();    }
+        sarkiSozleriDao = new SarkiSozleriDao();
+        return sarkiSozleriDao.list();
+    }
 
-   
+    public void setSozler(List<SarkiSozleri> sozler) {
+        this.sozler = sozler;
+    }
 
     public SarkiSozleriDao getSarkiSozleriDao() {
         return sarkiSozleriDao;
@@ -50,6 +53,8 @@ public class SarkiSozleriController implements Serializable {
     public void setSoz(SarkiSozleri soz) {
         this.soz = soz;
     }
+
+    
     
     public void update(){
         sarkiSozleriDao.update(this.soz);
