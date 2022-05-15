@@ -19,6 +19,17 @@ public class Kullanici {
     public Kullanici() {
     }
 
+    public Kullanici(int kullaniciID, String nickName, String sifre) {
+        this.kullaniciID = kullaniciID;
+        this.nickName = nickName;
+        this.sifre = sifre;
+    }
+
+    public Kullanici(String nickName, String sifre) {
+        this.nickName = nickName;
+        this.sifre = sifre;
+    }
+
     public Kullanici(String kullaniciAdi, String kullaniciSoyad, String nickName, String sifre) {
         this.kullaniciAdi = kullaniciAdi;
         this.kullaniciSoyad = kullaniciSoyad;
@@ -73,5 +84,7 @@ public class Kullanici {
     public void setSifre(String sifre) {
         this.sifre = sifre;
     }
+
+   
 
 }
