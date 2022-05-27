@@ -23,16 +23,62 @@ public class AlbumController implements Serializable {
     private AlbumDao albumDao;
     private Album album;
     
+    private int page=1;
+    private int pageSize=3;
+    private int pageCount;
+    
+    public void next(){
+        this.page++;
+    }
+    public void previuos(){
+        this.page--;
+    }
+
+    public AlbumDao getAlbumDao() {
+        if(albumDao == null){
+            albumDao = new AlbumDao();
+        }
+        return albumDao;
+    }
+
+    public void setAlbumDao(AlbumDao albumDao) {
+        this.albumDao = albumDao;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount= (int)Math.ceil(this.getAlbumDao().count()/pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) { 
+        this.pageCount = pageCount;
+    }
+    
+    
+    
     public AlbumController() {
     }
 
    
 
     
-    public AlbumDao getAlbumDAO() {
-        return albumDao;
-    }
-
+   
     public void setAlbumDAO(AlbumDao albumDAO) {
         this.albumDao = albumDAO;
     }
@@ -49,8 +95,8 @@ public class AlbumController implements Serializable {
     }
     
     public List<Album> getAlbumler(){
-        albumDao = new AlbumDao();
-        return albumDao.list();
+        this.albumler= this.getAlbumDao().findAll(page, pageSize);
+        return albumler;
     }
     
     public void update(){

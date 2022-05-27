@@ -11,6 +11,12 @@
             <h:commandButton action="/index" value="Home"/>  
             
         </h:form> 
+         <h:form>
+            Albüm Adı <h:inputText value="#{albumController.album.albumAdi}" />
+            <h:commandButton rendered="#{albumController.album.albumID==0}" action="#{albumController.create()}" value="Create"  />
+            <h:commandButton rendered="#{albumController.album.albumID!=0}" action="#{albumController.update()}" value="Update" />
+        </h:form>
+        
         <br></br>
         <h:form>
             <h:dataTable border="1" value="#{albumController.getAlbumler()}" var="album">
@@ -35,12 +41,22 @@
 
             </h:dataTable> 
         </h:form>
-        <br></br>
         <h:form>
-            Albüm Adı <h:inputText value="#{albumController.album.albumAdi}" />
-            <h:commandButton rendered="#{albumController.album.albumID==0}" action="#{albumController.create()}" value="Create"  />
-            <h:commandButton rendered="#{albumController.album.albumID!=0}" action="#{albumController.update()}" value="Update" />
-        </h:form>
+                <div align="center"><p>
+
+                        <h:commandButton styleClass="btn btn-dark" action="#{albumController.previuos()}" value="Önceki"  >
+                            <f:ajax execute="album-form" render="album-form album-table"/>
+                        </h:commandButton>
+                        <b1></b1>
+                        <b1></b1>
+                        <h:commandButton styleClass="btn btn-dark" action="#{albumController.next()}" value="Sonraki"  >
+                            <f:ajax execute="album-form" render="album-form album-table"/>
+                        </h:commandButton>
+                    </p> </div>
+
+            </h:form>
+        <br></br>
+       
         
     </h:body>
 </html>
