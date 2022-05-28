@@ -1,47 +1,66 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Albüm</title>
-    </head>
-    <h:body>
-        <h:form>
-            <h:commandButton action="/index" value="Home"/>  
-            
-        </h:form> 
-         <h:form>
-            Albüm Adı <h:inputText value="#{albumController.album.albumAdi}" />
-            <h:commandButton rendered="#{albumController.album.albumID==0}" action="#{albumController.create()}" value="Create"  />
-            <h:commandButton rendered="#{albumController.album.albumID!=0}" action="#{albumController.update()}" value="Update" />
-        </h:form>
-        
-        <br></br>
-        <h:form>
-            <h:dataTable border="1" value="#{albumController.getAlbumler()}" var="album">
-                <h:column>
-                    <f:facet name="header"> Album ID</f:facet>
-                    <h:outputText value="#{album.albumID}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Album Adı</f:facet>
-                    <h:outputText value="#{album.albumAdi}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Güncelleme Tarihi</f:facet>
-                    <h:outputText value="#{album.guncellemeTarihi}"/>  
-                </h:column>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
 
-              <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{albumController.delete(album)}" value="Sil" />
-                    <h:commandButton action="#{albumController.setAlbum(album)}" value="Düzenle" />
-                </h:column>
+    <ui:define name="content">
+        <div class="container mt-1">
+            <br></br>
+            <h:form id="album-form">
+                <div class="mb-3">
+                    <label  class="form-label">Albüm Adı</label>
+                    <h:inputText styleClass="form-control" value="#{albumController.album.albumAdi}" />
+                </div>
+                <div class="mb-3">
 
-            </h:dataTable> 
-        </h:form>
-        <h:form>
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{albumController.album.albumID==0}" action="#{albumController.create()}" value="Create"  >
+                        <f:ajax execute="album-form" render="album-form album-table"/>
+                    </h:commandButton>
+
+                    <h:commandButton styleClass="btn btn-warning"  rendered="#{albumController.album.albumID!=0}" action="#{albumController.update()}" value="Update" >
+                        <f:ajax execute="album-form" render="album-form album-table"/>
+                    </h:commandButton>
+
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{albumController.album.albumID!=0}" action="#{albumController.clearForm()}" value="Clear Form"  >
+                        <f:ajax execute="album-form" render="album-form album-table"/>
+                    </h:commandButton>
+
+                </div>
+            </h:form>
+
+            <h:form id="album-table">
+                <h:dataTable styleClass="table table-striped table-hover"  value="#{albumController.getAlbumler()}" var="album">
+                    <h:column>
+                        <f:facet name="header"> Album ID</f:facet>
+                        <h:outputText value="#{album.albumID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Album Adı</f:facet>
+                        <h:commandLink action="#{albumController.updateForm(album)}" value="#{album.albumAdi}">
+                            <f:ajax execute="@this" render="album-form"/>
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Güncelleme Tarihi</f:facet>
+                        <h:outputText value="#{album.guncellemeTarihi}"/>  
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">YONET</f:facet>
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{albumController.delete(album)}" value="Sil" >
+                            <f:ajax execute="album-form" render="album-form album-table"/>
+                        </h:commandButton>
+                        <h:commandButton styleClass="btn btn-success btn-sm" action="#{albumController.setAlbum(album)}" value="Düzenle" >
+                            <f:ajax execute="album-form" render="album-form album-table"/>
+                        </h:commandButton>
+                    </h:column>
+
+                </h:dataTable> 
+            </h:form>
+            <h:form>
                 <div align="center"><p>
 
                         <h:commandButton styleClass="btn btn-dark" action="#{albumController.previuos()}" value="Önceki"  >
@@ -55,9 +74,10 @@
                     </p> </div>
 
             </h:form>
-        <br></br>
-       
-        
-    </h:body>
-</html>
+            <br></br>
+
+
+        </div>
+    </ui:define>
+</ui:composition>
 

@@ -54,9 +54,9 @@ public class SarkiDao extends DbConnection{
                 Album a = (Album) this.getAlbumDAO().findById(result.getInt("albumid"));
                 Sanatci s = (Sanatci) this.getSanatciDao().findById(result.getInt("sanatciid"));
             list.add(new Sarki(
-                    result.getInt("sarkiID"),
-                    s,
-                    a,
+                     result.getInt("sarkiID"),
+                     result.getInt("sanatciid"),                   
+                     result.getInt("albumId"),
                     result.getString("sarkiAdi")
             ));
          }
@@ -89,7 +89,7 @@ public class SarkiDao extends DbConnection{
             Connection c = this.connect();
             Statement st = c.createStatement();
             String sorgu = "insert into sarki (sarkiid,sanatciid,albumid,sarkiadi) values ("+ sarki.getSarkiID()+ ",'" +
-                    sarki.getSanatci().getSanatciid() + ",'" + sarki.getAlbum().getAlbumID() +
+                    sarki.getSanatciid() + ",'" + sarki.getAlbumId() +
                     "','" + sarki.getSarkiAdi() + "')";
             st.executeUpdate(sorgu);
         } catch (Exception e){
@@ -104,7 +104,7 @@ public class SarkiDao extends DbConnection{
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "update sarki set albumid = '"+sarki.getAlbum().getAlbumID()+", sarkiadi'" +sarki.getSarkiAdi()+"' where sarkiid = '"+sarki.getSarkiID()+"'";
+            String sorgu = "update sarki set albumid = '"+sarki.getAlbumId()+" sarkiadi'" +sarki.getSarkiAdi()+"' where sarkiid = '"+sarki.getSarkiID()+"'";
             
 
             st.executeUpdate(sorgu);

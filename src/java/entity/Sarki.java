@@ -6,7 +6,6 @@ package entity;
 
 import java.util.Objects;
 
-
 /**
  *
  * @author ikbal
@@ -14,8 +13,8 @@ import java.util.Objects;
 public class Sarki {
 
     private int sarkiID;
-    private Sanatci sanatci;
-    private Album album;
+    private int sanatciid;
+    private int albumId;
     private String sarkiAdi;
 
     public Sarki() {
@@ -27,13 +26,6 @@ public class Sarki {
         this.sarkiAdi = sarkiAdi;
     }
 
-    public Sarki(int sarkiID, Sanatci sanatci, Album album, String sarkiAdi) {
-        this.sarkiID = sarkiID;
-        this.sanatci = sanatci;
-        this.album = album;
-        this.sarkiAdi = sarkiAdi;
-    }
-
     public int getSarkiID() {
         return sarkiID;
     }
@@ -42,20 +34,27 @@ public class Sarki {
         this.sarkiID = sarkiID;
     }
 
-    public Sanatci getSanatci() {
-        return sanatci;
+    public Sarki(int sarkiID, int sanatciid, int albumId, String sarkiAdi) {
+        this.sarkiID = sarkiID;
+        this.sanatciid = sanatciid;
+        this.albumId = albumId;
+        this.sarkiAdi = sarkiAdi;
     }
 
-    public void setSanatci(Sanatci sanatci) {
-        this.sanatci = sanatci;
+    public int getSanatciid() {
+        return sanatciid;
     }
 
-    public Album getAlbum() {
-        return album;
+    public void setSanatciid(int sanatciid) {
+        this.sanatciid = sanatciid;
     }
 
-    public void setAlbum(Album album) {
-        this.album = album;
+    public int getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
 
     public String getSarkiAdi() {
@@ -87,7 +86,5 @@ public class Sarki {
         final Sarki other = (Sarki) obj;
         return this.sarkiID == other.sarkiID;
     }
-
-   
 
 }

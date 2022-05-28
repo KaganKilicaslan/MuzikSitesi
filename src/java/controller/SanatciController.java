@@ -63,4 +63,10 @@ public class SanatciController implements Serializable {
         sanatciDao.create(this.sanatci);
         sanatci = new Sanatci();
     }
+    public void updateForm(Sanatci sanatci){
+        this.sanatci=sanatci;
+    }
+    public void clearForm(){
+        this.sanatci=new Sanatci();
+    }
 }

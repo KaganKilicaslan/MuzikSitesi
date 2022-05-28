@@ -1,59 +1,73 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Şarkı</title>
-    </head>
-    <h:body>
-        <h:form>
-         <h:commandButton action="/index" value="Home"/>  
-        </h:form> 
-        <br></br>
-        <h:form>
-           
-           Album
-            <h:selectOneMenu value="#{sarkiController.sarki.album}" converter="albumConverter">
-                <f:selectItems value="#{sarkiController.sarkilar}" var="c" itemValue="#{c}" itemLabel="#{c.albumadi}"/>
-            </h:selectOneMenu>
-           Sanatcı
-            <h:selectOneMenu value="#{sarkiController.sarki.sanatci}" converter="sanatciConverter">
-                <f:selectItems value="#{sarkiController.sarkilar}" var="c" itemValue="#{c}" itemLabel="#{c.ad}"/>
-            </h:selectOneMenu>
-            <h:dataTable border="1" value="#{sarkiController.getSarkilar()}" var="sarki">
-                <h:column>
-                    <f:facet name="header"> Sarki Adı</f:facet>
-                    <h:outputText value="#{sarki.sarkiAdi}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Sarki ID</f:facet>
-                    <h:outputText value="#{sarki.sarkiID}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Sanatci Adı</f:facet>
-                    <h:outputText value="#{sarki.sanatci.ad}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Album Adı</f:facet>
-                    <h:outputText value="#{sarki.album.albumAdi}"/>  
-                </h:column>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+    <ui:define name="content">
+        <div class="container mt-1">
+            <br></br>
+            <h:form id="sarki-table">
 
-              <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{sarkiController.delete(sarki)}" value="Sil" />
-                    <h:commandButton action="#{sarkiController.setSarki(sarki)}" value="Düzenle" />
-                </h:column>
+                <h:dataTable styleClass="table table-striped table-hover"  value="#{sarkiController.getSarkilar()}" var="sarki">
+                    <h:column>
+                        <f:facet name="header"> Sarki Adı</f:facet>
+                        <h:commandLink action="#{sarkiController.updateForm(sarki)}" value="#{sarki.sarkiAdi}">
+                            <f:ajax execute="@this" render="sarki-form"/>
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Sarki ID</f:facet>
+                        <h:outputText value="#{sarki.sarkiID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Sanatci Adı</f:facet>
+                        <h:outputText value="#{sarki.sanatciid}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Album Adı</f:facet>
+                        <h:outputText value="#{sarki.albumId}"/>  
+                    </h:column>
 
-            </h:dataTable> 
-        </h:form>
-        <br></br>
-        <h:form>
-            Sarki Adi <h:inputText value="#{sarkiController.sarki.sarkiAdi}" />
-            <h:commandButton rendered="#{sarkiController.sarki.sarkiID==0}" action="#{sarkiController.create()}" value="Create"  />
-            <h:commandButton rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.update()}" value="Update" />
-        </h:form>
-        
-    </h:body>
-</html>
+                    <h:column>
+                        <f:facet name="header">YONET</f:facet>
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{sarkiController.delete(sarki)}" value="Sil" >
+                            <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+
+                        </h:commandButton>
+                    </h:column>
+
+                </h:dataTable> 
+            </h:form>
+            <br></br>
+            <h:form id="sarki-form">
+                <div class="mb-3">
+                    <label  class="form-label">Sarki Adi</label>
+                    <h:inputText styleClass="form-control" value="#{sarkiController.sarki.sarkiAdi}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{sarkiController.sarki.sarkiID==0}" action="#{sarkiController.create()}" value="Create"  >
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>
+
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.update()}" value="Update" >
+
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>        
+
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.clearForm()}" value="Clear Form" >
+
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>        
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
 

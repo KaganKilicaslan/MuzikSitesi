@@ -1,41 +1,59 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Kategori</title>
-    </head>
-    <h:body>
-        <h:form>
-          <h:commandButton action="/index" value="Home"/>  
-        </h:form> 
-        <br></br>
-        <h:form>
-            <h:dataTable border="1" value="#{KategoriController.getKategoriler()}" var="kategori">
-                <h:column>
-                    <f:facet name="header"> kategori ID</f:facet>
-                    <h:outputText value="#{kategori.kategoriID}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Kategori Adı</f:facet>
-                    <h:outputText value="#{kategori.kategoriAdi}"/>  
-                </h:column>
-                
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+    <ui:define name="content">
+        <div class="container mt-1">
+            <br></br>
+            <h:form id="kategori-table">
+                <h:dataTable styleClass="table table-striped table-hover"  value="#{KategoriController.getKategoriler()}" var="kategori">
+                    <h:column>
+                        <f:facet name="header"> kategori ID</f:facet>
+                        <h:outputText value="#{kategori.kategoriID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Kategori Adı</f:facet>
+                        <h:commandLink action="#{KategoriController.updateForm(kategori)}" value="#{kategori.kategoriAdi}">
+                            <f:ajax execute="@this" render="kategori-form"/>
+                        </h:commandLink>
 
-              <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{KategoriController.delete(kategori)}" value="Sil" />
-                    <h:commandButton action="#{KategoriController.setKategori(kategori)}" value="Düzenle" />
-                </h:column>
+                    </h:column>
 
-            </h:dataTable> 
-        </h:form>
-        <br></br>
-        <h:form>
-            Kategory Adı <h:inputText value="#{KategoriController.kategori.kategoriAdi}" />
-            <h:commandButton rendered="#{KategoriController.kategori.kategoriID==0}" action="#{KategoriController.create()}" value="Create"  />
-            <h:commandButton rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.update()}" value="Update" />
-        </h:form>
-    </h:body>
-</html>
+
+                    <h:column>
+                        <f:facet name="header">YONET</f:facet>
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{KategoriController.delete(kategori)}" value="Sil" >
+                            <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+                        </h:commandButton>
+                        
+                    </h:column>
+
+                </h:dataTable> 
+            </h:form>
+            <br></br>
+            <h:form id="kategori-form">
+                <div class="mb-3">
+                    <label  class="form-label">Kategori Adı</label>
+                    <h:inputText styleClass="form-control" value="#{KategoriController.kategori.kategoriAdi}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{KategoriController.kategori.kategoriID==0}" action="#{KategoriController.create()}" value="Create"  >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.update()}" value="Update" >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.clearForm()}" value="Clear Form"  >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

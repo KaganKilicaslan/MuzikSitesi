@@ -64,7 +64,9 @@ public class YayinciController implements Serializable {
         yayinciDao.create(this.yayinci);
         yayinci = new Yayinci();
     }
-    
+    public void updateForm(Yayinci yayinci){
+        this.yayinci=yayinci;
+    }
     
     
 }

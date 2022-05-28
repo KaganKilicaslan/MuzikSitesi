@@ -4,55 +4,75 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Yayinci</title>
-    </head>
-    <h:body>
-        <h:form>
-           <h:commandButton action="/index" value="Home"/>  
-        </h:form> 
-        <br></br>
-        <h:form>
-            <h:dataTable border="1" value="#{YayinciController.getYayincilar()}" var="yayinci">
-                <h:column>
-                    <f:facet name="header"> yayıncı ID</f:facet>
-                    <h:outputText value="#{yayinci.yayinciID}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> album ID</f:facet>
-                    <h:outputText value="#{yayinci.albumID}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> sanatcı ID</f:facet>
-                    <h:outputText value="#{yayinci.sanatciId}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> sarkı ID</f:facet>
-                    <h:outputText value="#{yayinci.sarkiId}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Yayıncı Ad</f:facet>
-                    <h:outputText value="#{yayinci.yayinciAd}"/>  
-                </h:column>
-                
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+    <ui:define name="content">
+        <div class="container mt-1">
+            <br></br>
+            <h:form id="yayinci-table">
+                <h:dataTable styleClass="table table-striped table-hover" value="#{YayinciController.getYayincilar()}" var="yayinci">
+                    <h:column>
+                        <f:facet name="header"> yayıncı ID</f:facet>
+                        <h:outputText value="#{yayinci.yayinciID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> album ID</f:facet>
+                        <h:outputText value="#{yayinci.albumID}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> sanatcı ID</f:facet>
+                        <h:outputText value="#{yayinci.sanatciId}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> sarkı ID</f:facet>
+                        <h:outputText value="#{yayinci.sarkiId}"/>  
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Yayıncı Ad</f:facet>
+                        <h:commandLink action="#{YayinciController.updateForm(yayinci)}" value="#{yayinci.yayinciAd}">
+                            <f:ajax execute="@this" render="yayinci-form"/>
+                        </h:commandLink> 
+                    </h:column>
 
-              <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{YayinciController.delete(yayinci)}" value="Sil" />
-                    <h:commandButton action="#{YayinciController.setYayinci(yayinci)}" value="Düzenle" />
-                </h:column>
 
-            </h:dataTable> 
-        </h:form>
-        <br></br>
-        <h:form>
-            Yayıncı Adı <h:inputText value="#{YayinciController.yayinci.yayinciAd}" />
-            <h:commandButton rendered="#{YayinciController.yayinci.yayinciID==0}" action="#{YayinciController.create()}" value="Create"  />
-            <h:commandButton rendered="#{YayinciController.yayinci.yayinciID!=0}" action="#{YayinciController.update()}" value="Update" />
-        </h:form>
-        
-     </h:body>
-</html>
+                    <h:column>
+                        <f:facet name="header">YONET</f:facet>
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{YayinciController.delete(yayinci)}" value="Sil" >
+
+                            <f:ajax execute="yayinci-form" render="yayinci-form yayinci-table"/>
+
+                            </h:commandButton>
+                    </h:column>
+
+                </h:dataTable> 
+            </h:form>
+            <br></br>
+            <h:form id="yayinci-form">
+                <div class="mb-3">
+                    <label  class="form-label">Yayıncı Adı </label>
+                    <h:inputText styleClass="form-control" value="#{YayinciController.yayinci.yayinciAd}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{YayinciController.yayinci.yayinciID==0}" action="#{YayinciController.create()}" value="Create"  >
+                        <f:ajax execute="yayinci-form" render="yayinci-form yayinci-table"/>
+
+
+
+                    </h:commandButton>         
+
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{YayinciController.yayinci.yayinciID!=0}" action="#{YayinciController.update()}" value="Update" >
+
+                        <f:ajax execute="yayinci-form" render="yayinci-form yayinci-table"/>
+
+
+                    </h:commandButton>         
+
+
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

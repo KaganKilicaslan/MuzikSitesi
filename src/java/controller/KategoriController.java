@@ -67,7 +67,13 @@ public class KategoriController implements Serializable {
         kategori = new Kategori();
     }
     
+    public void updateForm(Kategori kategori){
+        this.kategori=kategori;
+    }
     
+    public void clearForm(){
+        this.kategori=new Kategori();
+    }
     
 }
     

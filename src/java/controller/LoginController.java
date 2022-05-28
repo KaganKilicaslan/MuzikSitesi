@@ -31,7 +31,7 @@ public class LoginController implements Serializable {
         if (user.getNickName().equals("test") && user.getSifre().equals("12345678")) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", user);
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("KULLANICI ADI VEYA ŞİFRE YANLIŞ!!"));
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("KULLANICI ADI VEYA ŞİFRE YANLIŞ!!"));
         }
     }
 

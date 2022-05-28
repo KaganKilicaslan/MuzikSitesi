@@ -73,5 +73,13 @@ public class ListeController implements Serializable {
         listeDao.create(this.liste);
         liste = new Liste();
     }
-    
+     public void updateForm(Liste liste){
+        this.liste=liste;
+    }
+     
+     
+     
+     public void clearForm(){
+         this.liste=new Liste();
+     }
 }

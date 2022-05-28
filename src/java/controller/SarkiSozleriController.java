@@ -68,5 +68,11 @@ public class SarkiSozleriController implements Serializable {
         soz = new SarkiSozleri();
     }
 
-    
+    public void updateForm(SarkiSozleri soz){
+        this.soz=soz;
+    }
+    public void clearForm(){
+        
+        this.soz= new SarkiSozleri();
+    }
 }
