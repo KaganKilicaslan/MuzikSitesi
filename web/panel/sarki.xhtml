@@ -9,6 +9,7 @@
         <div class="container mt-1">
             <br></br>
             <h:form id="sarki-table">
+                 <pre>Page #{sarkiController.page} of #{sarkiController.pageCount}</pre>
 
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{sarkiController.getSarkilar()}" var="sarki">
                     <h:column>
@@ -66,6 +67,19 @@
                     </h:commandButton>        
                 </div>
             </h:form>
+            
+             <h:form>
+                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.previous()}" value="Önceki"  >
+                            <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+                        </h:commandButton>
+                        <b1></b1>
+                        <b1></b1>
+                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.next()}" value="Sonraki"  >
+                            <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+                        </h:commandButton>
+               
+            </h:form>
+            
         </div>
     </ui:define>
 </ui:composition>

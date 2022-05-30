@@ -41,6 +41,50 @@ public class SanatciDao extends DbConnection{
         
         return list;
     }
+     
+       public List<Sanatci> findAll(int page,int pageSize) {
+        List<Sanatci> list = new ArrayList<>();
+         int start = (page - 1) * pageSize;
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from sanatci order by sanatciid asc limit "+pageSize+" offset "+start;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+             list.add(new Sanatci(
+                     rs.getInt("sanatciid"),
+                     rs.getString("ad"),
+                     rs.getInt("albumId")
+             ));
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+           public int count() {
+        int count=0;
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT count(sanatci) as sanatci_count from sanatci";
+
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count = rs.getInt("sanatci_count");
+           
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return count;
+    }
+       
     
     //Listeleme Fonskiyonu
     public List<Sanatci> list(){
@@ -66,6 +110,8 @@ public class SanatciDao extends DbConnection{
 
         return list;
     }
+    
+  
     //Silme Fonksiyonu
     public String delete(Sanatci sanatci){
         

@@ -23,12 +23,68 @@ public class ListeController implements Serializable {
     private List<Liste> listeler;
     private ListeDao listeDao;
     private Liste liste;
+    
+    
+     
+    private int page=1;
+    private int pageSize=3;
+    private int pageCount;
+    
+    
+     public void next(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page++;
+    }
+     public void previous(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page--;
+    }
+
+    public ListeDao getListeDao() {
+        return listeDao;
+    }
+
+    public void setListeDao(ListeDao listeDao) {
+        this.listeDao = listeDao;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount= (int)Math.ceil(this.getListDao().count()/pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+    
+    
+    
 
     public ListeController() {
     }
 
     public List<Liste> getListeler() {
-        listeDao = new ListeDao();
+        this.listeler= this.getListeDao().findAll(page, pageSize);
         return listeDao.list();
     }
 
@@ -36,9 +92,16 @@ public class ListeController implements Serializable {
         this.listeler = listeler;
     }
 
+    /*
+      if(albumDao == null){
+            albumDao = new AlbumDao();
+        }
+        return albumDao;
+    */
+    
     public ListeDao getListDao() {
-        if(liste == null){
-            liste = new Liste();
+        if(listeDao == null){
+            listeDao = new ListeDao();
         }
         return listeDao;
     }

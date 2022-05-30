@@ -44,6 +44,53 @@ public class SarkiSozleriDao extends DbConnection {
 
         return list;
     }
+     public List<SarkiSozleri> findAll(int page,int pageSize){
+        List<SarkiSozleri> list = new ArrayList<>();
+       int start = (page - 1) * pageSize;
+        
+        //Bağlantı kontrolu
+        try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT * from sarkisozleri order by sozid asc limit "+pageSize+","+start;
+            ResultSet  result = state.executeQuery(sorgu);
+            while(result.next()){
+            list.add(new SarkiSozleri(
+                    result.getInt(1),
+                    result.getInt(2),
+                    result.getInt(3),
+                    result.getInt(4),
+                    result.getString(5)
+            ));
+         }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+     
+      public int count(){
+        int count =0;
+       
+        
+        //Bağlantı kontrolu
+        try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT count (sarkisozleri) as sozler_count from kategori";
+            ResultSet  result = state.executeQuery(sorgu);
+            result.next();
+            count= result.getInt("sozler_count");
+           
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return count;
+    }
+    
+    
     
     //Silme Fonk.
     public String delete(SarkiSozleri soz){

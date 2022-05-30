@@ -41,6 +41,45 @@ public class KategoriDao extends DbConnection {
         return list;
     }
     
+      public List<Kategori> findAll(int page,int pageSize){
+        List<Kategori> list = new ArrayList<>();
+        int start = (page - 1) * pageSize;
+      try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT * from kategori  order by kategoriid asc limit "+pageSize+","+start;
+            ResultSet  result = state.executeQuery(sorgu);
+            while(result.next()){
+            list.add(new Kategori(
+                    result.getInt(1),
+                    result.getString(2)
+                    
+            ));
+         }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+      
+        public int count(){
+        int count=0;
+      try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT count (kategori)as kategori_count from kategori";
+            ResultSet  result = state.executeQuery(sorgu);
+             result.next();
+             count = result.getInt("kategori_count");
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return count;
+    }
+    
+    
     
      //Silme Fonksiyonu
     public String delete(Kategori kategori){

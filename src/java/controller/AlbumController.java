@@ -28,10 +28,16 @@ public class AlbumController implements Serializable {
     private int pageCount;
     
     public void next(){
-        this.page++;
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page++;
     }
-    public void previuos(){
-        this.page--;
+     public void previous(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page--;
     }
 
     public AlbumDao getAlbumDao() {

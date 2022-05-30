@@ -22,13 +22,61 @@ public class SarkiSozleriController implements Serializable {
     private List<SarkiSozleri> sozler;
     private SarkiSozleriDao sarkiSozleriDao;
     private SarkiSozleri soz;
+    
+    
+    private int page=1;
+    private int pageSize=3;
+    private int pageCount;
+    
+    
+    public void next(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page++;
+    }
+     public void previous(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page--;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+         this.pageCount= (int)Math.ceil(this.getSarkiSozleriDao().count()/pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+    
+    
+    
+    
 
     public SarkiSozleriController() {
     }
 
     public List<SarkiSozleri> getSozler() {
-        sarkiSozleriDao = new SarkiSozleriDao();
-        return sarkiSozleriDao.list();
+        this.sozler= this.getSarkiSozleriDao().findAll(page, pageSize);
+        return sozler;
     }
 
     public void setSozler(List<SarkiSozleri> sozler) {
@@ -36,6 +84,11 @@ public class SarkiSozleriController implements Serializable {
     }
 
     public SarkiSozleriDao getSarkiSozleriDao() {
+        
+         if(sarkiSozleriDao == null){
+            sarkiSozleriDao = new SarkiSozleriDao();
+        }
+       
         return sarkiSozleriDao;
     }
 

@@ -22,17 +22,64 @@ public class SanatciController implements Serializable {
     private List<Sanatci> sanatcilar;
     private SanatciDao sanatciDao;
     private Sanatci sanatci;
+    
+    private int page=1;
+    private int pageSize=3;
+    private int pageCount;
+   
+    public void next(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page++;
+    }
+     public void previous(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page--;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+         this.pageCount= (int)Math.ceil(this.getSanatciDao().count()/pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+   
 
     public SanatciController() {
     }
     
     
     public List<Sanatci> getSanatcilar() {
-        sanatciDao = new SanatciDao();
-        return sanatciDao.list();
+       this.sanatcilar =this.getSanatciDao().findAll(page,pageSize);
+       return sanatcilar;
     }
 
     public SanatciDao getSanatciDao() {
+         if(sanatciDao == null){
+            sanatciDao = new SanatciDao();
+        }
+       
         return sanatciDao;
     }
 

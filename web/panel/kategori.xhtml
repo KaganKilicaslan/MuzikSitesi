@@ -9,6 +9,8 @@
         <div class="container mt-1">
             <br></br>
             <h:form id="kategori-table">
+                <pre>Page #{KategoriController.page} of #{KategoriController.pageCount}</pre>
+                
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{KategoriController.getKategoriler()}" var="kategori">
                     <h:column>
                         <f:facet name="header"> kategori ID</f:facet>
@@ -33,6 +35,9 @@
 
                 </h:dataTable> 
             </h:form>
+           
+            
+            
             <br></br>
             <h:form id="kategori-form">
                 <div class="mb-3">
@@ -53,6 +58,22 @@
                         <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
                     </h:commandButton>
                 </div>
+            </h:form>
+            
+            
+               <h:form>
+                <div align="center"><p>
+
+                        <h:commandButton styleClass="btn btn-dark" action="#{KategoriController.previuos()}" value="Önceki"  >
+                            <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+                        </h:commandButton>
+                        <b1></b1>
+                        <b1></b1>
+                        <h:commandButton styleClass="btn btn-dark" action="#{KategoriController.next()}" value="Sonraki"  >
+                            <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+                        </h:commandButton>
+                    </p> </div>
+
             </h:form>
         </div>
     </ui:define>

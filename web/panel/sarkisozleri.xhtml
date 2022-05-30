@@ -9,6 +9,7 @@
         <div class="container mt-1">
             <br></br>
             <h:form id="soz-table">
+                 <pre>Page #{sarkiSozleriController.page} of #{sarkiSozleriController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{sarkiSozleriController.getSozler()}" var="soz">
                     <h:column>
                         <f:facet name="header"> Sarki Sozleri ID</f:facet>
@@ -76,6 +77,22 @@
                     </h:commandButton>
                 </div>
             </h:form>
+            
+                <h:form>
+                <div align="center"><p>
+
+                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiSozleriController.previuos()}" value="Önceki"  >
+                            <f:ajax execute="soz-form" render="soz-form soz-table"/>
+                        </h:commandButton>
+                        <b1></b1>
+                        <b1></b1>
+                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiSozleriController.next()}" value="Sonraki"  >
+                            <f:ajax execute="soz-form" render="soz-form soz-table"/>
+                        </h:commandButton>
+                    </p> </div>
+
+            </h:form>
+            
         </div>
     </ui:define>
 </ui:composition>

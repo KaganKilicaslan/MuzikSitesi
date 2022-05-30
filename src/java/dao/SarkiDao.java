@@ -39,6 +39,45 @@ public class SarkiDao extends DbConnection{
         return s;
     }
     
+    public Sarki findAll(int page,int pageSize) {
+       Sarki s = null;
+       int start = (page - 1) * pageSize;
+        try {
+            Connection c = this.connect();
+            Statement st = c.createStatement();
+            String query = "SELECT * from sarki order by sarkiid asc limit "+pageSize+","+start;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+               
+             s = new Sarki(rs.getInt("sarkiID"),rs.getString("sarkiAdi"));
+             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return s;
+    }
+    
+    public int count() {
+       
+       int count=0;
+        try {
+            Connection c = this.connect();
+            Statement st = c.createStatement();
+            String query = "SELECT count(sarkiid) as sarki_count from sarki";
+            ResultSet rs = st.executeQuery(query);
+             rs.next();
+             count= rs.getInt("sarki_count");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return count;
+    }
+    
+    
+    
     //Listeleme Fonskiyonu
     public List<Sarki> list(){
         List<Sarki> list = new ArrayList<>();

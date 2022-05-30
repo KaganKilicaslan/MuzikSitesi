@@ -32,6 +32,7 @@
             </h:form>
 
             <h:form id="album-table">
+                <pre>Page #{albumController.page} of #{albumController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{albumController.getAlbumler()}" var="album">
                     <h:column>
                         <f:facet name="header"> Album ID</f:facet>
