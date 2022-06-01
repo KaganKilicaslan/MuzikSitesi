@@ -6,6 +6,7 @@ package entity;
 
 import java.util.Objects;
 
+
 /**
  *
  * @author ikbal
@@ -26,19 +27,21 @@ public class Sarki {
         this.sarkiAdi = sarkiAdi;
     }
 
+    public Sarki(int sarkiID, int sanatciid, int albumId, String sarkiAdi) {
+        this.sarkiID = sarkiID;
+        this.sanatciid = sanatciid;
+        this.albumId = albumId;
+        this.sarkiAdi = sarkiAdi;
+    }
+    
+    
+
     public int getSarkiID() {
         return sarkiID;
     }
 
     public void setSarkiID(int sarkiID) {
         this.sarkiID = sarkiID;
-    }
-
-    public Sarki(int sarkiID, int sanatciid, int albumId, String sarkiAdi) {
-        this.sarkiID = sarkiID;
-        this.sanatciid = sanatciid;
-        this.albumId = albumId;
-        this.sarkiAdi = sarkiAdi;
     }
 
     public int getSanatciid() {
@@ -57,6 +60,7 @@ public class Sarki {
         this.albumId = albumId;
     }
 
+    
     public String getSarkiAdi() {
         return sarkiAdi;
     }
@@ -65,26 +69,8 @@ public class Sarki {
         this.sarkiAdi = sarkiAdi;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + this.sarkiID;
-        return hash;
-    }
+    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Sarki other = (Sarki) obj;
-        return this.sarkiID == other.sarkiID;
-    }
+   
 
 }

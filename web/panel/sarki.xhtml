@@ -9,7 +9,7 @@
         <div class="container mt-1">
             <br></br>
             <h:form id="sarki-table">
-                 <pre>Page #{sarkiController.page} of #{sarkiController.pageCount}</pre>
+                <pre>Page #{sarkiController.page} of #{sarkiController.pageCount}</pre>
 
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{sarkiController.getSarkilar()}" var="sarki">
                     <h:column>
@@ -23,11 +23,11 @@
                         <h:outputText value="#{sarki.sarkiID}"/>  
                     </h:column>
                     <h:column>
-                        <f:facet name="header"> Sanatci Adı</f:facet>
+                        <f:facet name="header"> Sanatci ID</f:facet>
                         <h:outputText value="#{sarki.sanatciid}"/>  
                     </h:column>
                     <h:column>
-                        <f:facet name="header"> Album Adı</f:facet>
+                        <f:facet name="header"> Album ID</f:facet>
                         <h:outputText value="#{sarki.albumId}"/>  
                     </h:column>
 
@@ -67,19 +67,19 @@
                     </h:commandButton>        
                 </div>
             </h:form>
-            
-             <h:form>
-                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.previous()}" value="Önceki"  >
-                            <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
-                        </h:commandButton>
-                        <b1></b1>
-                        <b1></b1>
-                        <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.next()}" value="Sonraki"  >
-                            <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
-                        </h:commandButton>
-               
+
+            <h:form>
+                <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.previous()}" value="Önceki"  >
+                    <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+                </h:commandButton>
+                <b1></b1>
+                <b1></b1>
+                <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.next()}" value="Sonraki"  >
+                    <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+                </h:commandButton>
+
             </h:form>
-            
+
         </div>
     </ui:define>
 </ui:composition>
