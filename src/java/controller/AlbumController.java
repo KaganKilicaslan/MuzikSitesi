@@ -116,5 +116,10 @@ public class AlbumController implements Serializable {
         albumDao.create(this.album);
         album = new Album();
     }
-    
+     public void updateForm(Album album){
+        this.album=album;
+    }
+     public void clearForm(Album album){
+         this.album=new Album();
+     }
 }

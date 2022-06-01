@@ -8,7 +8,7 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
-            <h:form>
+            <h:form id="kullanici-form">
                 <div class="mb-3">
                     <label  class="form-label"> Ad:</label>
                     <h:inputText styleClass="form-control" value="#{kullaniciController.kullanici.kullaniciAdi}"/>
@@ -26,12 +26,23 @@
                     <h:inputText styleClass="form-control" value="#{kullaniciController.kullanici.sifre}" /><br />
                 </div>
                 <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{kullaniciController.kullanici.kullaniciID==0}" action="#{kullaniciController.create()}" value="Create"/>
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{kullaniciController.kullanici.kullaniciID!=0}" action="#{kullaniciController.update()}" value="Update"/>
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{kullaniciController.kullanici.kullaniciID==0}" action="#{kullaniciController.create()}" value="Create">
+                        
+                        
+                         <f:ajax execute="kullanici-form" render="kullanici-form kullanici-table"/>
+                        
+                        
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{kullaniciController.kullanici.kullaniciID!=0}" action="#{kullaniciController.update()}" value="Update">
+                        
+                         <f:ajax execute="kullanici-form" render="kullanici-form kullanici-table"/>
+                        
+                        
+                    </h:commandButton>
                 </div>
             </h:form>
 
-            <h:form>
+            <h:form id="kullanici-table">
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{kullaniciController.getKullanicilar()}" var="kullanici">
                     <h:column>
                         <f:facet name="header"> Kullanıcı ID</f:facet>
@@ -55,8 +66,23 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">YONET</f:facet>
-                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{kullaniciController.delete(kullanici)}" value="Sil" />
-                        <h:commandButton styleClass="btn btn-success btn-sm" action="#{kullaniciController.setKullanici(kullanici)}" value="Düzenle" />
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{kullaniciController.delete(kullanici)}" value="Sil" >
+                            
+                                                        <f:ajax execute="kullanici-form" render="kullanici-form kullanici-table"/>
+
+                            
+                            
+                            
+                        </h:commandButton>
+                        <h:commandButton styleClass="btn btn-success btn-sm" action="#{kullaniciController.setKullanici(kullanici)}" value="Düzenle" >
+
+
+                            <f:ajax execute="kullanici-form" render="kullanici-form kullanici-table"/>
+
+
+
+                        </h:commandButton>          
+                    
                     </h:column>
                 </h:dataTable> 
             </h:form>
