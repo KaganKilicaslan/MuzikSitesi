@@ -65,7 +65,7 @@ public class KullaniciDao extends DbConnection {
         try {
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sorgu = "insert into kullanici (kullaniciAdi,kullaniciSoyad, nickName,sifre) values ('"+ kullanici.getKullaniciAdi()+
+            String sorgu = "insert into kullanici (ad,soyad,kullaniciadi,sifre) values ('"+ kullanici.getKullaniciAdi()+
                     "', '"+kullanici.getKullaniciSoyad()+ "', '" + kullanici.getNickName() + "','"+kullanici.getSifre()+"' )";
             st.executeUpdate(sorgu);
            
@@ -83,9 +83,9 @@ public class KullaniciDao extends DbConnection {
             Statement st = c.createStatement();
             /*String sorgu = "update kullanici set kullaniciadi = '" + kullanici.getNickName() + 
                     "' where kullaniciId = '" + kullanici.getKullaniciID() + "'";*/
-            String sorgu = "update kullanici set kullaniciAdi='"+kullanici.getKullaniciAdi()+
-                    "',kullaniciSoyad='"+kullanici.getKullaniciSoyad()+"', nickName='"+ kullanici.getNickName()+"',sifre='"+kullanici.getSifre()+
-                    "' where kullaniciID= '" + kullanici.getKullaniciID()+ "'";
+            String sorgu = "update kullanici set ad='"+kullanici.getKullaniciAdi()+
+                    "',soyad='"+kullanici.getKullaniciSoyad()+"', kullaniciadi='"+ kullanici.getNickName()+"',sifre='"+kullanici.getSifre()+
+                    "' where kullaniciid= '" + kullanici.getKullaniciID()+ "'";
             st.executeUpdate(sorgu);
         } catch (Exception e) {
             System.out.println(e.getMessage());
