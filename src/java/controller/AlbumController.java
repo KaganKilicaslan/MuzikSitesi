@@ -119,7 +119,7 @@ public class AlbumController implements Serializable {
      public void updateForm(Album album){
         this.album=album;
     }
-     public void clearForm(Album album){
+     public void clearForm( ){
          this.album=new Album();
      }
 }
