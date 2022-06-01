@@ -8,6 +8,35 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
+            <h:form id="sanatci-form">
+                <div class="mb-3">
+                    <label  class="form-label">  Sanatci Adı</label>
+                    <h:inputText styleClass="form-control" value="#{sanatciController.sanatci.ad}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{sanatciController.sanatci.sanatciid==0}" action="#{sanatciController.create()}" value="Create"  >
+                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
+
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{sanatciController.sanatci.sanatciid!=0}" action="#{sanatciController.update()}" value="Update" >
+
+                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
+
+
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{sanatciController.sanatci.sanatciid!=0}" action="#{sanatciController.clearForm()}" value="Clear Form" >
+
+                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
+
+
+
+                    </h:commandButton>
+   
+
+                </div>
+            </h:form>
             <h:form id="sanatci-table">
                  <pre>Page #{sanatciController.page} of #{sanatciController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{sanatciController.getSanatcilar()}" var="sanatci">
@@ -41,35 +70,7 @@
             </h:form>
 
             <br></br>
-            <h:form id="sanatci-form">
-                <div class="mb-3">
-                    <label  class="form-label">  Sanatci Adı</label>
-                    <h:inputText styleClass="form-control" value="#{sanatciController.sanatci.ad}" />
-                </div>
-                <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{sanatciController.sanatci.sanatciid==0}" action="#{sanatciController.create()}" value="Create"  >
-                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
-
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{sanatciController.sanatci.sanatciid!=0}" action="#{sanatciController.update()}" value="Update" >
-
-                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
-
-
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-dark" rendered="#{sanatciController.sanatci.sanatciid!=0}" action="#{sanatciController.clearForm()}" value="Clear Form" >
-
-                        <f:ajax execute="sanatci-form" render="sanatci-form sanatci-table"/>
-
-
-
-                    </h:commandButton>
-   
-
-                </div>
-            </h:form>
+            
             
                 <h:form>
                 <div align="center"><p>

@@ -8,6 +8,30 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
+            <h:form id="sarki-form">
+                <div class="mb-3">
+                    <label  class="form-label">Sarki Adi</label>
+                    <h:inputText styleClass="form-control" value="#{sarkiController.sarki.sarkiAdi}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{sarkiController.sarki.sarkiID==0}" action="#{sarkiController.create()}" value="Create"  >
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>
+
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.update()}" value="Update" >
+
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>        
+
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.clearForm()}" value="Clear Form" >
+
+                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
+
+                    </h:commandButton>        
+                </div>
+            </h:form>
             <h:form id="sarki-table">
                 <pre>Page #{sarkiController.page} of #{sarkiController.pageCount}</pre>
 
@@ -43,30 +67,7 @@
                 </h:dataTable> 
             </h:form>
             <br></br>
-            <h:form id="sarki-form">
-                <div class="mb-3">
-                    <label  class="form-label">Sarki Adi</label>
-                    <h:inputText styleClass="form-control" value="#{sarkiController.sarki.sarkiAdi}" />
-                </div>
-                <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{sarkiController.sarki.sarkiID==0}" action="#{sarkiController.create()}" value="Create"  >
-                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
-
-                    </h:commandButton>
-
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.update()}" value="Update" >
-
-                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
-
-                    </h:commandButton>        
-
-                    <h:commandButton styleClass="btn btn-dark" rendered="#{sarkiController.sarki.sarkiID!=0}" action="#{sarkiController.clearForm()}" value="Clear Form" >
-
-                        <f:ajax execute="sarki-form" render="sarki-form sarki-table"/>
-
-                    </h:commandButton>        
-                </div>
-            </h:form>
+            
 
             <h:form>
                 <h:commandButton styleClass="btn btn-dark" action="#{sarkiController.previous()}" value="Önceki"  >

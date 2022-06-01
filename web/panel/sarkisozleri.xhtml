@@ -8,6 +8,29 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
+             <h:form id="soz-form">
+                <div class="mb-3">
+                    <label  class="form-label">Şarki Sözü </label>
+                    <h:inputText styleClass="form-control" value="#{sarkiSozleriController.soz.sozler}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{sarkiSozleriController.soz.sozID==0}" action="#{sarkiSozleriController.create()}" value="Create"  >
+                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
+
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{sarkiSozleriController.soz.sozID!=0}" action="#{sarkiSozleriController.update()}" value="Update" >
+
+                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{sarkiSozleriController.soz.sozID!=0}" action="#{sarkiSozleriController.clearForm()}" value="Clear Form" >
+
+                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
+
+                    </h:commandButton>
+                </div>
+            </h:form>
             <h:form id="soz-table">
                  <pre>Page #{sarkiSozleriController.page} of #{sarkiSozleriController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover"  value="#{sarkiSozleriController.getSozler()}" var="soz">
@@ -54,29 +77,7 @@
             </h:form>
 
             <br></br>
-            <h:form id="soz-form">
-                <div class="mb-3">
-                    <label  class="form-label">Şarki Sözü </label>
-                    <h:inputText styleClass="form-control" value="#{sarkiSozleriController.soz.sozler}" />
-                </div>
-                <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{sarkiSozleriController.soz.sozID==0}" action="#{sarkiSozleriController.create()}" value="Create"  >
-                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
-
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{sarkiSozleriController.soz.sozID!=0}" action="#{sarkiSozleriController.update()}" value="Update" >
-
-                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-dark" rendered="#{sarkiSozleriController.soz.sozID!=0}" action="#{sarkiSozleriController.clearForm()}" value="Clear Form" >
-
-                        <f:ajax execute="soz-form" render="soz-form soz-table"/>
-
-                    </h:commandButton>
-                </div>
-            </h:form>
+           
             
                 <h:form>
                 <div align="center"><p>

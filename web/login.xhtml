@@ -7,7 +7,14 @@
                 template="/template.xhtml">
     <ui:define name="content">
 
+ <h:form>
+    
+         <h:commandButton styleClass="btn btn-outline-success" action="/private?faces-redirect=true" value="Private" />          
+
+                <h:commandButton styleClass="btn btn-outline-danger" action="/logout?faces-redirect=true" value="Logout" /><br />
+            </h:form> 
         <div class="container mt-1">
+           
             <h:form rendered="#{validUser == null}">
                 Kullanıcı Adı:
                 <h:inputText id = "ad" value="#{loginController.user.nickName}" required="true" requiredMessage="Bu alan zorunludur!">
@@ -17,7 +24,7 @@
                 Şifre: <h:inputText id = "pass" validator="#{loginController.validatePassword}" value="#{loginController.user.sifre}" /><br />
 
                 <h:message for ="pass" style="color: red; font-size: 10pt;"/><br />
-                <h:commandButton styleClass="btn btn-secondary" action="#{loginController.login()}" value="Giriş" />
+                <h:commandButton styleClass="btn btn-outline-secondary" action="#{loginController.login()}" value="Giriş" />
             </h:form>
 
             <h:panelGroup rendered="#{validUser != null}" layout="block">
@@ -25,16 +32,7 @@
                 Şifre: #{validUser.sifre}
             </h:panelGroup>
 
-            <hr />
-            <h:form>
-                <h:commandButton styleClass="btn btn-success" action="/private?faces-redirect=true" value="Private" />
-                <h:commandButton styleClass="btn btn-dark" action="/index?faces-redirect=true" value="Public" />
-                <h:commandButton styleClass="btn btn-danger" action="/logout?faces-redirect=true" value="Logout" />
-
-
-
-            </h:form> 
-            <hr />
+          
         </div>
     </ui:define>
 

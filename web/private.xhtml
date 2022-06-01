@@ -6,12 +6,11 @@
                 template="/template.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:commandButton styleClass="btn btn-warning " action="/panel/kullanici" value="Kullanıcı" />
-            <h:commandLink  styleClass="btn btn-secondary " action="/document/document" value="Document" />
-            <h:commandButton styleClass="btn btn-secondary " action="/panel/yayinci" value="Yayıncı" />
+            <h:commandButton styleClass="btn btn-outline-warning " action="/panel/kullanici" value="Kullanıcı" />
+            <h:commandLink  styleClass="btn btn-outline-primary " action="/document/document" value="Document" />
+            <h:commandButton styleClass="btn btn-outline-dark " action="/panel/yayinci" value="Yayıncı" />
 
-            <h:commandButton styleClass="btn btn-warning " action="/index?faces-redirect=true" value="Public" />         
-            <h:commandButton styleClass="btn btn-secondary " action="/logout?faces-redirect=true" value="Logout" />
+            <h:commandButton styleClass="btn btn-outline-danger " action="/logout?faces-redirect=true" value="Logout" />
 
 
 

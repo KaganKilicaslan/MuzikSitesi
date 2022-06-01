@@ -8,6 +8,27 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
+            <h:form id="liste-form">
+                <div class="mb-3">
+                    <label  class="form-label">Sarki Listesi</label>
+                    <h:inputText styleClass="form-control" value="#{listeController.liste.listeAdi}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{listeController.liste.listeID==0}" action="#{listeController.create()}" value="Create"  >
+                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{listeController.liste.listeID!=0}" action="#{listeController.update()}" value="Update" >
+                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
+
+                    </h:commandButton>
+
+
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{listeController.liste.listeID!=0}" action="#{listeController.clearForm()}" value="Clear Form"  >
+                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
             <h:form id="liste-table">
                 <pre>Page #{listeController.page} of #{listeController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover" value="#{listeController.getListeler()}" var="liste">
@@ -47,27 +68,7 @@
                 </h:dataTable> 
             </h:form>
             <br></br>
-            <h:form id="liste-form">
-                <div class="mb-3">
-                    <label  class="form-label">Sarki Listesi</label>
-                    <h:inputText styleClass="form-control" value="#{listeController.liste.listeAdi}" />
-                </div>
-                <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{listeController.liste.listeID==0}" action="#{listeController.create()}" value="Create"  >
-                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{listeController.liste.listeID!=0}" action="#{listeController.update()}" value="Update" >
-                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
-
-                    </h:commandButton>
-
-
-                    <h:commandButton styleClass="btn btn-dark" rendered="#{listeController.liste.listeID!=0}" action="#{listeController.clearForm()}" value="Clear Form"  >
-                        <f:ajax execute="liste-form" render="liste-form liste-table"/>
-                    </h:commandButton>
-                </div>
-            </h:form>
+            
              <h:form>
                 <div align="center"><p>
 

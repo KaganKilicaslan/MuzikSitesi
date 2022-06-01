@@ -8,6 +8,26 @@
     <ui:define name="content">
         <div class="container mt-1">
             <br></br>
+            <h:form id="kategori-form">
+                <div class="mb-3">
+                    <label  class="form-label">Kategori Adı</label>
+                    <h:inputText styleClass="form-control" value="#{KategoriController.kategori.kategoriAdi}" />
+                </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-primary" rendered="#{KategoriController.kategori.kategoriID==0}" action="#{KategoriController.create()}" value="Create"  >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-warning" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.update()}" value="Update" >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+
+
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-dark" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.clearForm()}" value="Clear Form"  >
+                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
             <h:form id="kategori-table">
                 <pre>Page #{KategoriController.page} of #{KategoriController.pageCount}</pre>
                 
@@ -39,26 +59,7 @@
             
             
             <br></br>
-            <h:form id="kategori-form">
-                <div class="mb-3">
-                    <label  class="form-label">Kategori Adı</label>
-                    <h:inputText styleClass="form-control" value="#{KategoriController.kategori.kategoriAdi}" />
-                </div>
-                <div class="mb-3">
-                    <h:commandButton styleClass="btn btn-primary" rendered="#{KategoriController.kategori.kategoriID==0}" action="#{KategoriController.create()}" value="Create"  >
-                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-warning" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.update()}" value="Update" >
-                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
-
-
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-dark" rendered="#{KategoriController.kategori.kategoriID!=0}" action="#{KategoriController.clearForm()}" value="Clear Form"  >
-                        <f:ajax execute="kategori-form" render="kategori-form kategori-table"/>
-                    </h:commandButton>
-                </div>
-            </h:form>
+            
             
             
                <h:form>
