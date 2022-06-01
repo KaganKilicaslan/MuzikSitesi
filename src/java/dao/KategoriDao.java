@@ -47,7 +47,7 @@ public class KategoriDao extends DbConnection {
       try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT * from kategori  order by kategoriid asc limit "+pageSize+","+start;
+            String sorgu = "SELECT * from kategori  order by kategoriid asc limit "+pageSize+" offset "+start;
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
             list.add(new Kategori(

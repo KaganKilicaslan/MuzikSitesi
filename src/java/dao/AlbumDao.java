@@ -76,11 +76,11 @@ public class AlbumDao extends DbConnection {
         try {
             Connection c = this.connect();
 
-            String query = "SELECT count(album) as album_count from";
+            String query = "SELECT count(album) as album_count from album";
             Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery(query);
-            count = rs.getInt("albm_count");
+            count = rs.getInt("album_count");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

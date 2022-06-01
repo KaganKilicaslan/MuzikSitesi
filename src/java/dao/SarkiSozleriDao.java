@@ -52,7 +52,7 @@ public class SarkiSozleriDao extends DbConnection {
         try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT * from sarkisozleri order by sozid asc limit "+pageSize+","+start;
+            String sorgu = "SELECT * from sarkisozleri order by sozid asc limit "+pageSize+" offset "+start;
             ResultSet  result = state.executeQuery(sorgu);
             while(result.next()){
             list.add(new SarkiSozleri(
@@ -72,13 +72,11 @@ public class SarkiSozleriDao extends DbConnection {
      
       public int count(){
         int count =0;
-       
-        
         //Bağlantı kontrolu
         try{
             Connection c = this.connect();
             Statement state = c.createStatement();
-            String sorgu = "SELECT count (sarkisozleri) as sozler_count from kategori";
+            String sorgu = "SELECT count (sarkisozleri) as sozler_count from sarkisozleri";
             ResultSet  result = state.executeQuery(sorgu);
             result.next();
             count= result.getInt("sozler_count");

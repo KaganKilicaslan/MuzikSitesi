@@ -82,7 +82,7 @@ public class SarkiSozleriController implements Serializable {
     public void setSozler(List<SarkiSozleri> sozler) {
         this.sozler = sozler;
     }
-
+// bu tamm
     public SarkiSozleriDao getSarkiSozleriDao() {
         
          if(sarkiSozleriDao == null){
