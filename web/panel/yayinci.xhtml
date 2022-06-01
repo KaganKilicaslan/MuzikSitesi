@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <div class="container mt-1">
             <br></br>
             <h:form id="yayinci-table">
+                 <pre>Page #{YayinciController.page} of #{YayinciController.pageCount}</pre>
                 <h:dataTable styleClass="table table-striped table-hover" value="#{YayinciController.getYayincilar()}" var="yayinci">
                     <h:column>
                         <f:facet name="header"> yayıncı ID</f:facet>
@@ -73,6 +74,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                 </div>
             </h:form>
+            
+             <h:form>
+                <div align="center"><p>
+
+                        <h:commandButton styleClass="btn btn-dark" action="#{YayinciController.previous()}" value="Önceki"  >
+                            <f:ajax execute="yayinci-form" render="yayinci-form yayinci-table"/>
+                        </h:commandButton>
+                        <b1></b1>
+                        <b1></b1>
+                        <h:commandButton styleClass="btn btn-dark" action="#{YayinciController.next()}" value="Sonraki"  >
+                            <f:ajax execute="yayinci-form" render="yayinci-form yayinci-table"/>
+                        </h:commandButton>
+                    </p> </div>
+
+            </h:form>
+
         </div>
     </ui:define>
 </ui:composition>

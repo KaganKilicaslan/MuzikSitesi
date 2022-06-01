@@ -42,6 +42,54 @@ public class YayinciDao extends DbConnection {
         
         return list;
     }
+    
+     public List<Yayinci> findAll(int page,int pageSize){
+        List<Yayinci> list = new ArrayList<>();
+         int start = (page - 1) * pageSize;
+        try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT * from yayinci order by yayinciid asc limit "+pageSize+" offset "+start;
+            ResultSet  result = state.executeQuery(sorgu);
+            while(result.next()){
+            list.add(new Yayinci(
+                    result.getInt(1),
+                    result.getInt(2),
+                    result.getInt(3),
+                    result.getInt(4),
+                    result.getString(5)
+                    
+            ));
+         } 
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+    
+      public int count(){
+       int count =0;
+    
+        try{
+            Connection c = this.connect();
+            Statement state = c.createStatement();
+            String sorgu = "SELECT count (yayinciid) as yayinci_count from yayinci";
+            ResultSet  result = state.executeQuery(sorgu);
+            result.next();
+            count =result.getInt("yayinci_count");
+            
+            
+         
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return count;
+    }
+    
+    
+    
         
          //Silme Fonk.   
     public String delete(Yayinci yayinci){

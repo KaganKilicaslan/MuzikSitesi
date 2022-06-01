@@ -22,19 +22,66 @@ public class YayinciController implements Serializable {
     private YayinciDao yayinciDao;
     private Yayinci yayinci;
     
+    private int page=1;
+    private int pageSize=3;
+    private int pageCount;
+    
+    
+     public void next(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page++;
+    }
+     public void previous(){
+        if(this.page == this.getPageCount())
+            this.page=1;
+        else
+            this.page--;
+    }
+   
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+         this.pageCount= (int)Math.ceil(this.getYayinciDao().count()/pageSize);
+        this.pageCount = pageCount;
+    }
+   
     public YayinciController() {
     }
 
     public List<Yayinci> getYayincilar() {
-       yayinciDao = new YayinciDao();
-       return yayinciDao.list();
+        this.yayincilar= this.getYayinciDao().findAll(page, pageSize);
+       return yayincilar;
     }
 
     public void setYayincilar(List<Yayinci> yayincilar) {
         this.yayincilar = yayincilar;
     }
 
+   
     public YayinciDao getYayinciDao() {
+        if(yayinciDao == null){
+            yayinciDao = new YayinciDao();
+        }
         return yayinciDao;
     }
 

@@ -28,7 +28,7 @@ public class DocumentController implements Serializable{
 
     private Part doc;
 
-    private final String uploadTo="/Users/ikbal/MuzikSitesi/upload";
+    private final String uploadTo="C:\\Users\\karao\\MuzikSitesi\\upload";
 
     public String getUploadTo() {
         return uploadTo;
